@@ -15,6 +15,28 @@ export class MapThumbnail extends Component {
     render() {
         let imgUri = {uri: this.props.mapObject.get('image').url()};
 
+        let total, wins, losses, draws;
+        let winP, drawP, lossP;
+
+        wins = 0; losses = 0; draws = 0; total = 0;
+
+        if(this.props.record) {
+            total = this.props.record[0] + this.props.record[1] + this.props.record[2];
+            wins = this.props.record[0];
+            losses = this.props.record[1];
+            draws = this.props.record[2];
+        }
+
+        winP = 0;
+        drawP = 0;
+        lossP = 0;
+
+        if(total > 0) {
+            winP = wins/total;
+            drawP = draws/total;
+            lossP = losses/total;
+        }
+
         return(
             <View style={styles.thumbContainer}>
                 <Image source={imgUri}
@@ -24,11 +46,14 @@ export class MapThumbnail extends Component {
                     <Text style={styles.marqueeText}>{this.props.mapObject.get('name') }</Text>
                 </View>
 
-                <View style={styles.marqueeTopLeft}>
-                    <Text style={styles.recordText}>1-1 </Text>
-                </View>
-
                 <View style={styles.mapBorder}  />
+
+
+                <View style={{position:'absolute',bottom:2,left:2,right:2,height : 2,flexDirection:'row', backgroundColor: 'rgba(100,100,100,.4)'}}>
+                    <View style={{opacity: .8,height : '100%', width : winP*100 + '%', backgroundColor : 'rgb(0,255,0)'}} />
+                    <View style={{opacity: .8,height : '100%', width : lossP*100 + '%', backgroundColor : 'red'}} />
+                    <View style={{opacity: .8,height : '100%', width : drawP*100 + '%', backgroundColor : 'yellow'}} />
+                </View>
             </View>
         );
     }
@@ -37,7 +62,7 @@ export class MapThumbnail extends Component {
 
 const styles = StyleSheet.create({
    thumbContainer  : {
-       width: 80
+       width: 120
    },
    thumb: {
        height:100,
@@ -56,12 +81,6 @@ const styles = StyleSheet.create({
         left:0,
         backgroundColor: 'rgba(255,255,255,.6)'
     },
-    marqueeTopLeft: {
-        position: 'absolute',
-        bottom  : 0,
-        right:0,
-        backgroundColor: 'rgba(255,255,255,0)'
-    },
     marqueeText :  {
         fontFamily:(Platform.OS === 'ios') ? 'HelveticaNeue-CondensedBold' : 'sans-serif-condensed',
         fontWeight:'bold',
@@ -70,13 +89,6 @@ const styles = StyleSheet.create({
         padding: 1,
         color: '#444',
         textAlign: 'center'
-    },
-    recordText :  {
-        fontWeight:'bold',
-        fontSize:10,
-        padding: 1,
-        color: '#444',
-        textAlign: 'right'
     },
     mapBorder: {
         position: 'absolute' ,

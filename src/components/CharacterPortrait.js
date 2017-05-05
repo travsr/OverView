@@ -14,35 +14,27 @@ export class CharacterPortrait extends Component {
 
         let imgUri = {uri: this.props.character.get('image').url()};
 
+        let total, wins, losses, draws;
+        let winP, drawP, lossP;
 
-        let recordText = "";
-        if(this.props.record[2] === 0) {
-            let newRec = this.props.record.slice();
-            newRec.pop();
-            recordText = newRec.join('-');
+        wins = 0; losses = 0; draws = 0; total = 0;
+
+        if(this.props.record) {
+            total = this.props.record[0] + this.props.record[1] + this.props.record[2];
+            wins = this.props.record[0];
+            losses = this.props.record[1];
+            draws = this.props.record[2];
         }
-        else {
-            recordText = this.props.record.slice().join('-');
+
+        winP = 0;
+        drawP = 0;
+        lossP = 0;
+
+        if(total > 0) {
+            winP = wins/total;
+            drawP = draws/total;
+            lossP = losses/total;
         }
-
-
-        // let pct, total, wins, losses;
-        //
-        // total = this.props.record[0] + this.props.record[1] + this.props.record[2];
-        // wins = this.props.record[0] + .5*this.props.record[2];
-        // losses = this.props.record[1] + .5*this.props.record[2];
-        // if(total > 0)
-        //     pct = wins/total;
-        // else
-        //     pct = .5;
-        //
-        // let green = 255*pct;
-        // let red = 255-green;
-        // let rgb = "rgba("+red+','+green+',0,.8)';
-
-        let pct = .5;
-        let rgb = "rgba(0,0,0,.5)";
-
 
 
         return(
@@ -50,16 +42,19 @@ export class CharacterPortrait extends Component {
                 <Image style={styles.portraitBg} source={require('./../img/characters/00-portrait-bg.jpg')}/>
                 <Image style={this.props.selected ? styles.portraitImgSelected : styles.portraitImg} source={imgUri} resizeMode='cover'/>
                 <View style={styles.portraitBorder} />
-                <View style={{padding:1, position:'absolute',bottom:0,left:0,right:0, backgroundColor: rgb}}>
-                    <Text style={styles.marqueeText}>{pct}</Text>
+                <View style={{position:'absolute',bottom:2,left:2,right:2,height : 5,flexDirection:'row', backgroundColor: 'rgba(100,100,100,.4)'}}>
+                    <View style={{opacity: .8,height : '100%', width : winP*100 + '%', backgroundColor : 'rgb(0,255,0)'}} />
+                    <View style={{opacity: .8,height : '100%', width : lossP*100 + '%', backgroundColor : 'red'}} />
+                    <View style={{opacity: .8,height : '100%', width : drawP*100 + '%', backgroundColor : 'yellow'}} />
                 </View>
+
             </View>
         );
     }
 }
 
 const cWidth = 60;
-const cHeight = 75;
+const cHeight = 90;
 
 const styles = StyleSheet.create({
     portraitContainer: {
@@ -106,6 +101,13 @@ const styles = StyleSheet.create({
         left:0
     },
     marqueeText:  {
+        fontSize : 10,
+        fontWeight: 'bold',
+        color: '#fff'
+    },
+    marqueeTextRight:  {
+        position: 'absolute',
+        right: 0,
         fontSize : 10,
         fontWeight: 'bold',
         color: '#fff'

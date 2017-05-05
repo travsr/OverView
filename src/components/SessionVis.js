@@ -19,21 +19,22 @@ export class SessionVis extends Component {
 
     }
 
-
     render() {
         return (
             <View style={styles.overview}>
-                {this.props.logEntries.slice().reverse().map((entry, index) => {
+                {this.props.logEntries.map((entry, index) => {
+
                     let w = 100/this.props.logEntries.length + '%';
                     let c = 'green';
-                    if(entry.get('result') == 'draw') {
-                        c = '#ff9c00';
-                    }
-                    else if(entry.get('result') == 'loss') {
-                        c = 'red';
-                    }
 
-                    return <View style={{width:w,height: 80,backgroundColor : c, opacity : .8, borderLeftColor : 'rgba(0,0,0,.3)', borderLeftWidth : 1}} key={index}/>;
+                    if(entry.get('result') == 'draw')
+                        c = '#ff9c00';
+                    else if(entry.get('result') == 'loss')
+                        c = 'red';
+
+                    return (
+                        <View style={{width:w,height: 80,backgroundColor : c, opacity : .8, borderLeftColor : 'rgba(0,0,0,.3)', borderLeftWidth : 1}} key={index}/>
+                    );
                 })}
                 <View style={styles.overviewBorder}/>
             </View>

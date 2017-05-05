@@ -54,14 +54,16 @@ export class Entry extends Component {
             btnSaveEnabled : true,
             btnSaveText : "SAVE",
             characterResults : {},
-            mapResults : {}
+            mapResults : {},
+            characterResults : {}
         };
 
         this.dataManager.onAfterLoad(()=> {
             this.setState(this.state);
 
             this.setState({
-                characterResults : this.dataManager.serverDataModel.selectedSession.get('characterResults')
+                characterResults : this.dataManager.serverDataModel.selectedSession.get('characterResults'),
+                mapResults : this.dataManager.serverDataModel.selectedSession.get('mapResults')
             });
         });
 
@@ -119,6 +121,11 @@ export class Entry extends Component {
                     this.props.navigation.navigate("History");
 
                     setTimeout(()=>{
+                        this.setState({
+                            characterResults : this.dataManager.serverDataModel.selectedSession.get('characterResults'),
+                            mapResults : this.dataManager.serverDataModel.selectedSession.get('mapResults')
+                        });
+
                         // reset the selected values
                         this.resetState();
                     },200) ;
@@ -166,11 +173,13 @@ export class Entry extends Component {
 
                     <MapSelect
                         mapList={this.dataManager.serverDataModel.maps}
+                        mapResults={this.state.mapResults}
                         selectedMapObject={this.state.selectedMapObject}
                         onMapSelect={this.onMapSelect}
                     />
 
                     <CharacterSelect
+                        selectedMapObject={this.state.selectedMapObject}
                         characterList={this.dataManager.serverDataModel.characters}
                         characterResults={this.state.characterResults}
                         selectedCharacters={this.state.selectedCharacters}
