@@ -42,10 +42,10 @@ export class CharacterPortrait extends Component {
                 <Image style={styles.portraitBg} source={require('./../img/characters/00-portrait-bg.jpg')}/>
                 <Image style={this.props.selected ? styles.portraitImgSelected : styles.portraitImg} source={imgUri} resizeMode='cover'/>
                 <View style={styles.portraitBorder} />
-                <View style={{position:'absolute',bottom:2,left:2,right:2,height : 5,flexDirection:'row', backgroundColor: 'rgba(100,100,100,.4)'}}>
-                    <View style={{opacity: .8,height : '100%', width : winP*100 + '%', backgroundColor : 'rgb(0,255,0)'}} />
+                <View elevation={10} style={{position:'absolute',bottom:2,left:2,right:2,height : 5,flexDirection:'row', backgroundColor: 'rgba(100,100,100,.4)'}}>
+                    <View style={{opacity: .8,height : '100%', width : winP*100 + '%', backgroundColor : 'rgb(0,200,0)'}} />
                     <View style={{opacity: .8,height : '100%', width : lossP*100 + '%', backgroundColor : 'red'}} />
-                    <View style={{opacity: .8,height : '100%', width : drawP*100 + '%', backgroundColor : 'yellow'}} />
+                    <View style={{opacity: .8,height : '100%', width : drawP*100 + '%', backgroundColor : '#ff9c00'}} />
                 </View>
 
             </View>

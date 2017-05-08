@@ -19,7 +19,6 @@ export class History extends Component {
         headerTitleStyle : {color : '#fff'}
     };
 
-    static updateRef = 0;
     dataManager = new DataManager();
 
     constructor(props) {

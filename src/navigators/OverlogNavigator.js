@@ -18,6 +18,7 @@ import {
     Platform
 } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
+import { Startup } from '../views/Startup';
 import { Entry } from '../views/Entry';
 import { History } from '../views/History';
 import { Onboard } from '../views/Onboard';
@@ -60,6 +61,7 @@ MainTabs.navigationOptions = {
 };
 
 export const OverlogNavigator = StackNavigator({
-    //Onboard :  {screen : Onboard  },
+    Startup : {screen : Startup},
+    Onboard :  {screen : Onboard  },
     MainTabs : {screen : MainTabs }
 });

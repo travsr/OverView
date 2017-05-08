@@ -20,16 +20,27 @@ export class SessionVis extends Component {
     }
 
     render() {
+
+        let summary = [];
+
+        // create our summary array based on
+        if(this.props.logEntries) {
+            summary = this.props.logEntries.map((entry)=>entry.get('result'));
+        }
+        else if(this.props.summary) {
+            summary = this.props.summary;
+        }
+
         return (
             <View style={styles.overview}>
-                {this.props.logEntries.map((entry, index) => {
+                {summary.map((entry, index) => {
 
-                    let w = 100/this.props.logEntries.length + '%';
+                    let w = 100/summary.length + '%';
                     let c = 'green';
 
-                    if(entry.get('result') == 'draw')
+                    if(entry == 'draw')
                         c = '#ff9c00';
-                    else if(entry.get('result') == 'loss')
+                    else if(entry == 'loss')
                         c = 'red';
 
                     return (
@@ -46,7 +57,7 @@ export class SessionVis extends Component {
 const styles = StyleSheet.create({
     overview: {
         width: '100%',
-        height: '100%',
+        height: 80,
         backgroundColor: 'blue',
         flexDirection: 'row'
     },

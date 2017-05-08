@@ -62,8 +62,8 @@ export class Entry extends Component {
             this.setState(this.state);
 
             this.setState({
-                characterResults : this.dataManager.serverDataModel.selectedSession.get('characterResults'),
-                mapResults : this.dataManager.serverDataModel.selectedSession.get('mapResults')
+                characterResults : this.dataManager.serverDataModel.currentUser.get('characterResults'),
+                mapResults : this.dataManager.serverDataModel.currentUser.get('mapResults')
             });
         });
 
@@ -122,8 +122,8 @@ export class Entry extends Component {
 
                     setTimeout(()=>{
                         this.setState({
-                            characterResults : this.dataManager.serverDataModel.selectedSession.get('characterResults'),
-                            mapResults : this.dataManager.serverDataModel.selectedSession.get('mapResults')
+                            characterResults : this.dataManager.serverDataModel.currentUser.get('characterResults'),
+                            mapResults : this.dataManager.serverDataModel.currentUser.get('mapResults')
                         });
 
                         // reset the selected values

@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         opacity : .8,
         position: 'absolute',
         top: 3, right : 6, left: 6, bottom :3,
-        borderColor : 'yellow',
+        borderColor : '#ff9c00',
         borderLeftWidth : 0,
         borderRightWidth : 4
     },

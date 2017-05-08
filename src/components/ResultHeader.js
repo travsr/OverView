@@ -7,10 +7,14 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
+    Button,
     Modal
 } from 'react-native';
 
 import { SessionVis } from './SessionVis';
+import { SessionHistory } from './../views/SessionHistory';
+import { StyledButton } from './StyledButton';
+import { DataManager } from './DataManager';
 
 
 export class ResultHeader extends Component {
@@ -23,7 +27,17 @@ export class ResultHeader extends Component {
             return entry.get('result');
         });
 
-        this.state = {resultMap:resultMap};
+        this.state = {resultMap:resultMap, sessionModalVisible : false};
+
+        this.showSessionModal = this.showSessionModal.bind(this);
+    }
+
+    dataManager = new DataManager();
+
+    showSessionModal() {
+
+        console.log("choose session clicked");
+        this.setState({sessionModalVisible : true});
     }
 
 
@@ -42,7 +56,21 @@ export class ResultHeader extends Component {
                 <View style={styles.inlayShadow} elevation={20}/>
                 <View style={styles.infoView} >
                     <Text style={styles.recordText}>{recordText}</Text>
+                    <StyledButton
+                        style={{position:'absolute',right:0,top:'50%', width : 120, height: 40, backgroundColor : '#00a5e2'}}
+                        textStyle={{color : '#fff'}}
+                        title={"Choose Session"}
+                        enabled={true}
+                        onPress={this.showSessionModal}/>
                 </View>
+
+                <Modal
+                    visible={this.state.sessionModalVisible}
+                    onRequestClose={()=>{this.setState({sessionModalVisible : false})}}
+                    animationType="slide">
+                    <SessionHistory
+                        sessions={this.dataManager.serverDataModel.logSessions} />
+                </Modal>
 
             </View>
         );

@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 
 import {StyledButton} from '../components/StyledButton';
+import { NavigationActions } from 'react-navigation';
+
 
 let Parse = require('parse/react-native');
 
@@ -34,6 +36,16 @@ export class Onboard extends Component {
             console.log("logged in");
             console.log(user.get("username"));
             this.props.navigation.navigate('MainTabs');
+
+
+            // Reset the navigation stack so we can't go back to login
+            const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'MainTabs'})]
+            });
+            this.props.navigation.dispatch(resetAction);
+
+
 
         }, (error) => {
             console.log(error);

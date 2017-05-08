@@ -49,10 +49,10 @@ export class MapThumbnail extends Component {
                 <View style={styles.mapBorder}  />
 
 
-                <View style={{position:'absolute',bottom:2,left:2,right:2,height : 2,flexDirection:'row', backgroundColor: 'rgba(100,100,100,.4)'}}>
+                <View elevation={6} style={{position:'absolute',bottom:2,left:2,right:2,height : 2,flexDirection:'row', backgroundColor: 'rgba(100,100,100,.4)'}}>
                     <View style={{opacity: .8,height : '100%', width : winP*100 + '%', backgroundColor : 'rgb(0,255,0)'}} />
                     <View style={{opacity: .8,height : '100%', width : lossP*100 + '%', backgroundColor : 'red'}} />
-                    <View style={{opacity: .8,height : '100%', width : drawP*100 + '%', backgroundColor : 'yellow'}} />
+                    <View style={{opacity: .8,height : '100%', width : drawP*100 + '%', backgroundColor : '#ff9c00'}} />
                 </View>
             </View>
         );
