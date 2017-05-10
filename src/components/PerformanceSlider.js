@@ -37,17 +37,21 @@ export class PerformanceSlider extends Component {
     render() {
 
         return (
-            <View style={{width: '100%'}}>
+            <View style={{width: '100%', flexDirection : 'row',paddingTop : 20}}>
                 <Text style={styles.sliderText}>{this.props.text}</Text>
-                <Text style={styles.rankText}>{this.getGrade()}</Text>
-                <Slider
-                    minimumValue={0}
-                    maximumValue={14}
-                    step={1}
-                    value={7}
-                    style={styles.slider}
-                    onValueChange={(value) => {this.sliderChanged(value)}}
-                />
+                <View style={{width : '33%', justifyContent : 'center'}}>
+                    <Text style={styles.rankText}>{this.getGrade()}</Text>
+                </View>
+                <View style={{width : '66%', justifyContent : 'center'}}>
+                    <Slider
+                        minimumValue={0}
+                        maximumValue={14}
+                        step={1}
+                        value={7}
+                        style={styles.slider}
+                        onValueChange={(value) => {this.sliderChanged(value)}}
+                    />
+                </View>
             </View>
         );
     }
@@ -56,13 +60,18 @@ export class PerformanceSlider extends Component {
 
 const styles = StyleSheet.create({
     slider : {
-        marginTop : 10,
-        marginBottom : 10
+        marginTop : 0,
+
     },
     sliderText : {
         marginLeft : 0,
         textAlign: 'center',
-        backgroundColor : 'transparent'
+        backgroundColor : 'transparent',
+        position: 'absolute',
+        top : 0,
+        left : 0,
+        right : 0,
+        textAlign : 'center'
     },
     rankText : {
         textAlign: 'center',

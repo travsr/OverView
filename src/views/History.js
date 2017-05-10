@@ -36,11 +36,6 @@ export class History extends Component {
         this.dataManager.onAfterLoad(() => {
             this.setState(this.state);
         });
-        // this.dataManager.selectSession().then(()=>{
-        //     this.setState(this.state);
-        // },(err)=>{
-        //
-        // });
 
     }
     _onRefresh() {
@@ -53,8 +48,8 @@ export class History extends Component {
             .done(()=> {
                 this.setState({refreshing: false});
             });
-
     }
+
     render() {
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -63,6 +58,12 @@ export class History extends Component {
 
         return (
             <View style={{width: '100%',height : '100%'}}>
+
+                <Image
+                    source={require('./../img/app-bg2.png')}
+                    resizeMode="cover"
+                    style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
+                />
 
                 <ListView
                     dataSource={dataSource}
@@ -76,6 +77,7 @@ export class History extends Component {
                         />
                     }
                 />
+
             </View>
         );
     }

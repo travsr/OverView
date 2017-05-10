@@ -16,12 +16,10 @@ import { SessionHistory } from './../views/SessionHistory';
 import { StyledButton } from './StyledButton';
 import { DataManager } from './DataManager';
 
-
 export class ResultHeader extends Component {
 
     constructor(props) {
         super(props);
-
 
         let resultMap = this.props.logEntries.map((entry, index) => {
             return entry.get('result');
@@ -80,7 +78,7 @@ export class ResultHeader extends Component {
 const styles = StyleSheet.create({
     container : {
         width : '100%',
-        height: 60,
+        height: 80,
         backgroundColor : 'purple'
     },
     containerBg : {

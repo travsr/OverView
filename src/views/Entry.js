@@ -190,14 +190,14 @@ export class Entry extends Component {
                         result={this.state.selectedResult}
                     />
 
-                    <View style={{margin:10, flexDirection : 'row', flexWrap: 'wrap'}}>
-                        <View style={{width:'50%', borderWidth : 1, borderColor : 'rgba(0,0,0,.2)', padding: 10}}>
+                    <View style={{margin:0, flexDirection : 'row', flexWrap: 'wrap'}}>
+                        <View style={{width:'100%',margin: 2,  padding: 4,backgroundColor : 'rgba(255,255,255,.3)'}}>
                             <PerformanceSlider
                                 value={this.state.myPerf}
                                 onChange={this.onMyPerfChange}
                                 text="My Performance"/>
                         </View>
-                        <View style={{width:'50%', borderWidth : 1, borderColor : 'rgba(0,0,0,.2)', borderLeftWidth : 0, padding: 10}}>
+                        <View style={{width:'100%', margin : 2, padding: 4, backgroundColor : 'rgba(255,255,255,.3)'}}>
                             <PerformanceSlider
                                 value={this.state.teamPerf}
                                 onChange={this.onTeamPerfChange}
@@ -212,7 +212,6 @@ export class Entry extends Component {
 
                 </ScrollView>
                 </KeyboardAvoidingView>
-
 
                 <StyledButton
                     onPress={this.addEntry}
