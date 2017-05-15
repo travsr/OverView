@@ -191,13 +191,13 @@ export class Entry extends Component {
                     />
 
                     <View style={{margin:0, flexDirection : 'row', flexWrap: 'wrap'}}>
-                        <View style={{width:'100%',margin: 2,  padding: 4,backgroundColor : 'rgba(255,255,255,.3)'}}>
+                        <View style={{width:'100%',margin: 0,  padding: 4,backgroundColor : 'rgba(255,255,255,.1)', borderTopColor : 'rgba(255,255,255,.6)', borderTopWidth: 1}}>
                             <PerformanceSlider
                                 value={this.state.myPerf}
                                 onChange={this.onMyPerfChange}
                                 text="My Performance"/>
                         </View>
-                        <View style={{width:'100%', margin : 2, padding: 4, backgroundColor : 'rgba(255,255,255,.3)'}}>
+                        <View style={{width:'100%', margin : 0, padding: 4, backgroundColor : 'rgba(255,255,255,.1)', borderTopColor : 'rgba(255,255,255,.6)', borderTopWidth: 1, borderBottomWidth:1,borderBottomColor:'rgba(255,255,255,.6)'}}>
                             <PerformanceSlider
                                 value={this.state.teamPerf}
                                 onChange={this.onTeamPerfChange}

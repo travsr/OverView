@@ -11,6 +11,8 @@ import {
 
 import { SessionVis } from './SessionVis';
 
+let TimeAgo = require('react-native-timeago');
+
 export class SessionItem extends Component {
 
     constructor(props) {

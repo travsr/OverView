@@ -15,6 +15,7 @@ import { SessionVis } from './SessionVis';
 import { SessionHistory } from './../views/SessionHistory';
 import { StyledButton } from './StyledButton';
 import { DataManager } from './DataManager';
+let TimeAgo = require('react-native-timeago');
 
 export class ResultHeader extends Component {
 
@@ -41,7 +42,7 @@ export class ResultHeader extends Component {
 
     render() {
 
-        let recordText = "0 - 0 - 0";
+        let recordText = "0-0";
         if(this.props.session.get) {
             recordText = this.props.session.get('win') + "-" + this.props.session.get('loss') + "-" + this.props.session.get('draw');
         }
@@ -54,20 +55,22 @@ export class ResultHeader extends Component {
                 <View style={styles.inlayShadow} elevation={20}/>
                 <View style={styles.infoView} >
                     <Text style={styles.recordText}>{recordText}</Text>
+                    <TimeAgo style={{color:'#fff'}} time={new Date().getTime()} />
                     <StyledButton
-                        style={{position:'absolute',right:0,top:'50%', width : 120, height: 40, backgroundColor : '#00a5e2'}}
-                        textStyle={{color : '#fff'}}
-                        title={"Choose Session"}
-                        enabled={true}
-                        onPress={this.showSessionModal}/>
+                            style={{position:'absolute',right:0,top:0 , width : 120, height: 80, backgroundColor : 'transparent'}}
+                            textStyle={{color : '#fff'}}
+                            title={"Choose Session"}
+                            enabled={true}
+                            onPress={this.showSessionModal}
+                    />
                 </View>
 
                 <Modal
-                    visible={this.state.sessionModalVisible}
-                    onRequestClose={()=>{this.setState({sessionModalVisible : false})}}
-                    animationType="slide">
+                        visible={this.state.sessionModalVisible}
+                        onRequestClose={()=>{this.setState({sessionModalVisible : false})}}
+                        animationType="slide">
                     <SessionHistory
-                        sessions={this.dataManager.serverDataModel.logSessions} />
+                            sessions={this.dataManager.serverDataModel.logSessions} />
                 </Modal>
 
             </View>
@@ -83,21 +86,22 @@ const styles = StyleSheet.create({
     },
     containerBg : {
         position: 'absolute',
-        top : 0,
+        top   : 0,
         right : 0,
-        left : 0,
+        left  : 0,
         bottom : 0
     },
     inlayShadow : {
         position : 'absolute',
-        left : 0, right : 0,
-        bottom : 0,
-        height: 1,
+        left    : 0, right : 0,
+        bottom  : 0,
+        height  : 1,
         backgroundColor:'rgba(50,50,50,1)'
 
     },
     infoView : {
         position : 'absolute',
+        justifyContent : 'center',
         left : 0, right : 0,
         bottom : 0,
         top: 0,

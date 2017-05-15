@@ -37,10 +37,11 @@ export class PerformanceSlider extends Component {
     render() {
 
         return (
-            <View style={{width: '100%', flexDirection : 'row',paddingTop : 20}}>
-                <Text style={styles.sliderText}>{this.props.text}</Text>
+            <View style={{width: '100%', flexDirection : 'row', paddingTop : 14, paddingBottom : 14}}>
+
                 <View style={{width : '33%', justifyContent : 'center'}}>
                     <Text style={styles.rankText}>{this.getGrade()}</Text>
+                    <Text style={styles.sliderText}>{this.props.text}</Text>
                 </View>
                 <View style={{width : '66%', justifyContent : 'center'}}>
                     <Slider
@@ -68,10 +69,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor : 'transparent',
         position: 'absolute',
-        top : 0,
+        top  : -14 ,
         left : 0,
         right : 0,
-        textAlign : 'center'
+        textAlign : 'center',
+        fontSize : 10
     },
     rankText : {
         textAlign: 'center',
