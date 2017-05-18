@@ -3,6 +3,7 @@ import {
     View,
     Image,
     TextInput,
+    Text,
     Button,
     StyleSheet,
     StatusBar
@@ -37,15 +38,12 @@ export class Onboard extends Component {
             console.log(user.get("username"));
             this.props.navigation.navigate('MainTabs');
 
-
             // Reset the navigation stack so we can't go back to login
             const resetAction = NavigationActions.reset({
                 index: 0,
                 actions: [NavigationActions.navigate({ routeName: 'MainTabs'})]
             });
             this.props.navigation.dispatch(resetAction);
-
-
 
         }, (error) => {
             console.log(error);
@@ -64,33 +62,34 @@ export class Onboard extends Component {
                 <StatusBar backgroundColor="#34315a"  />
                 <View style={{flexDirection : 'column', padding : 20 }}>
 
-                    <View>
-                        <TextInput
-                            style={styles.myInput}
-                            placeholder="Username"
-                            underlineColorAndroid="transparent"
-                            placeholderTextColor="#6b66a0"
-                            onChangeText={(text) => {this.setState({username:text})} }
-                        />
-                        <TextInput
-                            style={styles.myInput }
-                            underlineColorAndroid="transparent"
-                            placeholder="Password"
-                            placeholderTextColor="#6b66a0"
-                            secureTextEntry={true}
-                            onChangeText={(text) => {this.setState({password:text})} }
-                        />
-                        <View style={{flexDirection : 'row'}}>
-                            <StyledButton title="Sign Up" onPress={()=>{this.signUp()}}
-                                          enabled={true}
-                                          style={{width: '50%', height : 40,backgroundColor: '#00a5e2'  }}
-                                          textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic' }}/>
-                            <StyledButton title="Log In" onPress={()=>{this.login()}}
-                                          enabled={true}
-                                          style={{width: '50%', height : 40,backgroundColor: '#ff9c00'  }}
-                                          textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic'}}/>
-                        </View>
+
+                    <TextInput
+                        style={styles.myInput}
+                        placeholder="Username"
+                        underlineColorAndroid="transparent"
+                        placeholderTextColor="#6b66a0"
+                        onChangeText={(text) => {this.setState({username:text})} }
+                    />
+                    <TextInput
+                        style={styles.myInput }
+                        underlineColorAndroid="transparent"
+                        placeholder="Password"
+                        placeholderTextColor="#6b66a0"
+                        secureTextEntry={true}
+                        onChangeText={(text) => {this.setState({password:text})} }
+                    />
+                    <View style={{flexDirection : 'row'}}>
+                        <StyledButton title="Sign Up" onPress={()=>{this.signUp()}}
+                                      enabled={true}
+                                      style={{width: '50%', height : 40,backgroundColor: '#00a5e2'  }}
+                                      textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic' }}/>
+                        <StyledButton title="Log In" onPress={()=>{this.login()}}
+                                      enabled={true}
+                                      style={{width: '50%', height : 40,backgroundColor: '#ff9c00'  }}
+                                      textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic'}}/>
                     </View>
+
+                    <Text style={{marginTop : 20 }}>By signing up you agree to our Terms of Service and Privacy Policy</Text>
 
                 </View>
             </View>

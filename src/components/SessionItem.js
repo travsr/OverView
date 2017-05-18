@@ -25,7 +25,7 @@ export class SessionItem extends Component {
     render() {
         return (
             <View>
-                <SessionVis summary={this.props.session.get('summary')} />
+                <SessionVis summary={this.props.session.get('summary')}  style={{width: '100%',height:40}}/>
             </View>
         );
     }

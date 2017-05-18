@@ -60,8 +60,16 @@ MainTabs.navigationOptions = {
     headerVisible : false
 };
 
+Parse.User.currentAsync().then((user) => {
+
+
+});
+
 export const OverlogNavigator = StackNavigator({
-    Startup : {screen : Startup},
     Onboard :  {screen : Onboard  },
     MainTabs : {screen : MainTabs }
+},{
+    initialRouteName : "MainTabs"
 });
+
+

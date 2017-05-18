@@ -34,14 +34,12 @@ export class ResultHeader extends Component {
     dataManager = new DataManager();
 
     showSessionModal() {
-
         console.log("choose session clicked");
         this.setState({sessionModalVisible : true});
     }
 
 
     render() {
-
         let recordText = "0-0";
         if(this.props.session.get) {
             recordText = this.props.session.get('win') + "-" + this.props.session.get('loss') + "-" + this.props.session.get('draw');
@@ -50,20 +48,25 @@ export class ResultHeader extends Component {
         return (
             <View style={styles.container}>
 
-                <SessionVis logEntries={this.props.logEntries} style={{position:'absolute',top : 0,left:0,right:0,bottom: 0}}/>
-
-                <View style={styles.inlayShadow} elevation={20}/>
                 <View style={styles.infoView} >
                     <Text style={styles.recordText}>{recordText}</Text>
-                    <TimeAgo style={{color:'#fff'}} time={new Date().getTime()} />
-                    <StyledButton
-                            style={{position:'absolute',right:0,top:0 , width : 120, height: 80, backgroundColor : 'transparent'}}
-                            textStyle={{color : '#fff'}}
-                            title={"Choose Session"}
-                            enabled={true}
-                            onPress={this.showSessionModal}
-                    />
+                    <TimeAgo style={{color:'#fff',marginTop:0, width: '100%', textAlign: 'center'}} time={new Date().getTime()} />
+                    <SessionVis logEntries={this.props.logEntries}
+                                style={{width:'80%', height: 20, marginTop: 10 }}/>
                 </View>
+
+                <StyledButton
+                    style={{position:'absolute',right:0,bottom:0, width : 120, height: 80, backgroundColor : 'transparent'}}
+                    textStyle={{color : '#fff'}}
+                    title={"View Session History"}
+                    enabled={true}
+                    onPress={this.showSessionModal}
+                />
+
+
+
+                <View style={styles.inlayShadow} elevation={20}/>
+
 
                 <Modal
                         visible={this.state.sessionModalVisible}
@@ -81,8 +84,8 @@ export class ResultHeader extends Component {
 const styles = StyleSheet.create({
     container : {
         width : '100%',
-        height: 80,
-        backgroundColor : 'purple'
+        height: 220,
+        backgroundColor :'rgba(97, 91, 181, .5)'
     },
     containerBg : {
         position: 'absolute',
@@ -100,24 +103,20 @@ const styles = StyleSheet.create({
 
     },
     infoView : {
-        position : 'absolute',
         justifyContent : 'center',
-        left : 0, right : 0,
-        bottom : 0,
-        top: 0,
-
-        backgroundColor:'rgba(50,50,50,.2)'
+        flexDirection : 'row',
+        flexWrap: 'wrap'
     },
     recordText : {
-
+        marginTop : 10,
         color : '#fff',
+        width : '100%',
+        textAlign: 'center',
         fontWeight : 'bold',
         fontStyle : 'italic',
         fontSize : 30,
-        margin : 10,
         textShadowColor : '#000',
         textShadowOffset : {width : 1,  height : 1},
         textShadowRadius : 4
-
     }
 });

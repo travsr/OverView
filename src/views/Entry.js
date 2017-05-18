@@ -17,7 +17,8 @@ import {
     Button,
     StatusBar,
     Platform,
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Switch
 } from 'react-native';
 
 import { TabNavigator } from 'react-navigation';
@@ -35,7 +36,7 @@ export class Entry extends Component {
     static navigationOptions = {
         title: 'New' ,
         headerStyle : { backgroundColor: '#000' },
-        headerTitleStyle : {color : '#fff' }
+        headerTitleStyle : {color : '#fff' },
     };
 
     dataManager = new DataManager();
@@ -55,7 +56,6 @@ export class Entry extends Component {
             btnSaveText : "SAVE",
             characterResults : {},
             mapResults : {},
-            characterResults : {}
         };
 
         this.dataManager.onAfterLoad(()=> {
@@ -167,7 +167,7 @@ export class Entry extends Component {
                     style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
                 />
 
-                <KeyboardAvoidingView behavior="position">
+                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={-100}>
 
                 <ScrollView style={{width:'100%',height:'100%'}} >
 
@@ -191,24 +191,56 @@ export class Entry extends Component {
                     />
 
                     <View style={{margin:0, flexDirection : 'row', flexWrap: 'wrap'}}>
-                        <View style={{width:'100%',margin: 0,  padding: 4,backgroundColor : 'rgba(255,255,255,.1)', borderTopColor : 'rgba(255,255,255,.6)', borderTopWidth: 1}}>
+
+                        <View style={{padding : 10, width: '100%',backgroundColor: 'rgba(97, 91, 181, .0)' }}>
+                            <TextInput
+                                onChangeText={this.onMatchNotesChange}
+                                style={{height: 50,width:'100%' }}
+                                placeholder="Match Notes"
+                            />
+                        </View>
+
+                        <View elevation={10} style={{width: '100%',padding : 10, flexDirection : 'row', justifyContent : 'center'}}>
+
+                            <View style={{width : '33%', justifyContent : 'center', flexDirection: 'row',flexWrap:'wrap' }}>
+                                <Switch
+                                    onValueChange={(value) => {}}
+                                    value={true} />
+                                <Text style={{textAlign:'center',backgroundColor :'transparent', width: '100%', fontSize : 11}}>Thrower</Text>
+                            </View>
+                            <View style={{width : '33%', justifyContent : 'center', flexDirection: 'row',flexWrap:'wrap' }}>
+                                <Switch
+                                    onValueChange={(value) => {}}
+                                    value={true} />
+                                <Text style={{textAlign:'center',backgroundColor :'transparent', width: '100%', fontSize : 11}}>Leaver</Text>
+                            </View>
+                            <View style={{width : '33%', justifyContent : 'center', flexDirection: 'row',flexWrap:'wrap' }}>
+
+                                <TextInput
+                                    keyboardType="numeric"
+                                    style={{height: 50,width:'100%' }}
+                                    placeholder="SR Rating"
+                                />
+                            </View>
+
+                        </View>
+
+                        <View style={{width:'50%',margin: 0,  padding: 4,backgroundColor : 'rgba(0, 0, 0, .01)', borderColor : 'rgba(97, 91, 181, 0)', borderTopWidth: 1, borderBottomWidth:1, borderRightWidth:1}}>
                             <PerformanceSlider
                                 value={this.state.myPerf}
                                 onChange={this.onMyPerfChange}
-                                text="My Performance"/>
+                                text="My Gameplay"/>
                         </View>
-                        <View style={{width:'100%', margin : 0, padding: 4, backgroundColor : 'rgba(255,255,255,.1)', borderTopColor : 'rgba(255,255,255,.6)', borderTopWidth: 1, borderBottomWidth:1,borderBottomColor:'rgba(255,255,255,.6)'}}>
+                        <View style={{width:'50%', margin : 0, padding: 4, backgroundColor : 'rgba(0,0,0,.01)', borderColor : 'rgba(97, 91, 181, 0)', borderTopWidth: 1, borderBottomWidth:1,}}>
                             <PerformanceSlider
                                 value={this.state.teamPerf}
                                 onChange={this.onTeamPerfChange}
-                                text="Team's Performance"/>
+                                text="Team's Gameplay"/>
                         </View>
-                        <TextInput
-                            onChangeText={this.onMatchNotesChange}
-                            style={{height: 50,width:'100%' }}
-                            placeholder="Match Notes"
-                        />
+
                     </View>
+
+                    <View style={{height:100}}></View>
 
                 </ScrollView>
                 </KeyboardAvoidingView>

@@ -12,8 +12,7 @@ export class Startup extends Component {
 
     static navigationOptions = {
         title: 'Startup' ,
-        headerStyle : { backgroundColor: '#9b9dc4' },
-        headerTitleStyle : {color : '#fff'}
+        headerVisible : false,
     };
 
     dataManager = new DataManager();
@@ -33,7 +32,7 @@ export class Startup extends Component {
                     index: 0,
                     actions: [NavigationActions.navigate({ routeName: 'MainTabs'})]
                 });
-                this.props.navigation.dispatch(resetAction);
+                //this.props.navigation.dispatch(resetAction);
             }
             // Otherwise show the login screen
             else {
@@ -43,7 +42,7 @@ export class Startup extends Component {
                     index: 0,
                     actions: [NavigationActions.navigate({ routeName: 'Onboard'})]
                 });
-                this.props.navigation.dispatch(resetAction);
+                //this.props.navigation.dispatch(resetAction);
             }
 
 
