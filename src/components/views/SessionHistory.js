@@ -10,7 +10,7 @@ import {
     ListView
 } from 'react-native';
 
-import { SessionItem } from './../components/SessionItem';
+import { SessionItem } from '../container/SessionItem';
 
 
 export class SessionHistory extends Component {

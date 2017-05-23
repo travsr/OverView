@@ -22,12 +22,12 @@ import {
 } from 'react-native';
 
 import { TabNavigator } from 'react-navigation';
-import { CharacterSelect } from '../components/CharacterSelect';
-import { MapSelect } from '../components/MapSelect';
-import { MatchResultPicker } from '../components/MatchResultPicker';
-import { PerformanceSlider } from '../components/PerformanceSlider';
-import { StyledButton } from '../components/StyledButton';
-import { DataManager } from '../components/DataManager';
+import { CharacterSelect } from '../container/CharacterSelect';
+import { MapSelect } from '../container/MapSelect';
+import { MatchResultPicker } from '../presentation/MatchResultPicker';
+import { PerformanceSlider } from '../presentation/PerformanceSlider';
+import { StyledButton } from '../presentation/StyledButton';
+import { DataManager } from '../../data/DataManager';
 
 let Parse = require('parse/react-native');
 

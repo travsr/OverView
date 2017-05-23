@@ -3,7 +3,7 @@ import {
     View,
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { DataManager } from '../components/DataManager';
+import { DataManager } from '../../data/DataManager';
 
 let Parse = require('parse/react-native');
 

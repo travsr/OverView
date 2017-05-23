@@ -9,7 +9,7 @@ import {
     StatusBar
 } from 'react-native';
 
-import {StyledButton} from '../components/StyledButton';
+import {StyledButton} from '../presentation/StyledButton';
 import { NavigationActions } from 'react-navigation';
 
 

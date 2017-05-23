@@ -9,7 +9,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import { SessionVis } from './SessionVis';
+import { SessionVis } from '../presentation/SessionVis';
 
 let TimeAgo = require('react-native-timeago');
 

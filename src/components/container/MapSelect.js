@@ -9,7 +9,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import { MapThumbnail } from './MapThumbnail';
+import { MapThumbnail } from '../presentation/MapThumbnail';
 
 export class MapSelect extends Component {
 

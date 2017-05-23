@@ -11,7 +11,7 @@ import {
 
 import {
     CharacterPortrait
-} from './CharacterPortrait';
+} from '../presentation/CharacterPortrait';
 
 
 export class CharacterSelect extends Component {
@@ -71,6 +71,8 @@ export class CharacterSelect extends Component {
                         <TouchableOpacity  key={index}  onPress={()=>{this.characterPressed(character)}}>
                             <View>
                                 <CharacterPortrait
+                                    width={60}
+                                    height={90}
                                     record={record}
                                     selected={this.isCharacterSelected(character)} character={character}  />
                             </View>

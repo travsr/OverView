@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     overviewBorder: {
         position: 'absolute',
         top: 0, left: 0, right: 0, bottom: 0,
-        opacity: .5,
+        opacity: .05,
         borderColor: '#000',
         borderWidth: 1
     },

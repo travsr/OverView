@@ -18,11 +18,11 @@ import {
     Platform
 } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
-import { Startup } from '../views/Startup';
-import { Entry } from '../views/Entry';
-import { History } from '../views/History';
-import { Onboard } from '../views/Onboard';
-import { DataManager } from '../components/DataManager';
+import { Startup } from '../components/views/Startup';
+import { Entry } from '../components/views/Entry';
+import { History } from '../components/views/History';
+import { Onboard } from '../components/views/Onboard';
+import { DataManager } from '../data/DataManager';
 
 // Init parse
 let Parse = require('parse/react-native');

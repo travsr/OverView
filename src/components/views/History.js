@@ -7,9 +7,9 @@ import {
     Text
 } from 'react-native';
 
-import {ResultViewer} from '../components/ResultViewer';
-import {ResultHeader} from '../components/ResultHeader';
-import { DataManager } from '../components/DataManager';
+import {ResultViewer} from '../container/ResultViewer';
+import {ResultHeader} from '../container/ResultHeader';
+import { DataManager } from '../../data/DataManager';
 
 export class History extends Component {
 
@@ -49,7 +49,6 @@ export class History extends Component {
                 this.setState({refreshing: false});
             });
     }
-
     render() {
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -68,8 +67,14 @@ export class History extends Component {
                 <ListView
                     dataSource={dataSource}
                     enableEmptySections={true}
-                    renderHeader={()=><ResultHeader session={this.dataManager.serverDataModel.selectedSession} logEntries={this.dataManager.serverDataModel.selectedLogEntries} /> }
-                    renderRow={(entry)=><ResultViewer entry={entry}/>}
+                    renderHeader={()=>
+                        <ResultHeader
+                            session={this.dataManager.serverDataModel.selectedSession}
+                            logEntries={this.dataManager.serverDataModel.selectedLogEntries} />
+                    }
+                    renderRow={(entry)=>
+                        <ResultViewer entry={entry}/>
+                    }
                     refreshControl={
                         <RefreshControl
                             refreshing={this.state.refreshing}
