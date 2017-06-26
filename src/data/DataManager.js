@@ -37,6 +37,16 @@ export class DataManager{
         this.callbacks.push(cb);
     }
 
+    onDataChange(cb) {
+        this.callbacks.push(cb);
+    }
+
+    dispatchOnDataChangeEvent() {
+        this.callbacks.forEach((cb)=>{
+            cb();
+        });
+    }
+
     // Calls all functions that get
     // data for the server data model
     getServerDataModel() {

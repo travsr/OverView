@@ -57,7 +57,7 @@ export class Onboard extends Component {
 
         return (
             <View style={{width:'100%',height:'100%',justifyContent : 'center'}}>
-                <Image source={require('./../img/maps/12-lijiang.jpg') }  resizeMode="cover" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
+                <Image source={require('../../images/maps/12-lijiang.jpg') }  resizeMode="cover" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
                 <StatusBar backgroundColor="#34315a"  />
                 <View style={{flexDirection : 'column', padding : 20 }}>

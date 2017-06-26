@@ -69,7 +69,8 @@ export const OverlogNavigator = StackNavigator({
     Onboard :  {screen : Onboard  },
     MainTabs : {screen : MainTabs }
 },{
-    initialRouteName : "MainTabs"
+    initialRouteName : "MainTabs",
+    headerMode : "none"
 });
 
 

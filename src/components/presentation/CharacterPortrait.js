@@ -101,7 +101,7 @@ export class CharacterPortrait extends Component {
 
         return(
             <View style={this.styles.portraitContainer}>
-                <Image style={this.styles.portraitBg} source={require('./../img/characters/00-portrait-bg.jpg')}/>
+                <Image style={this.styles.portraitBg} source={require('../../images/characters/00-portrait-bg.jpg')}/>
                 <Image style={this.props.selected ? this.styles.portraitImgSelected : this.styles.portraitImg} source={imgUri} resizeMode='cover'/>
                 <View style={this.styles.portraitBorder} />
                 <View elevation={10} style={{position:'absolute',bottom:2,left:2,right:2,height : 5,flexDirection:'row', backgroundColor: 'rgba(100,100,100,.4)'}}>

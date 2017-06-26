@@ -72,7 +72,7 @@ export class ResultViewer extends Component {
                     <View style={styles.thumbView}>
                         {characters.map((character, index) =>
                             <View style={styles.charThumb} key={index}>
-                                <Image source={require('../img/characters/00-portrait-bg.jpg')}  style={styles.charThumbImg}/>
+                                <Image source={require('../../images/characters/00-portrait-bg.jpg')}  style={styles.charThumbImg}/>
                                 <Image source={characterImgs[index]} style={styles.charThumbImg}/>
                             </View>
                         )}

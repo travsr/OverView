@@ -59,7 +59,7 @@ export class History extends Component {
             <View style={{width: '100%',height : '100%'}}>
 
                 <Image
-                    source={require('./../img/app-bg2.png')}
+                    source={require('../../images/app-bg2.png')}
                     resizeMode="cover"
                     style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
                 />
