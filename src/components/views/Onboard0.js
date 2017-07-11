@@ -67,11 +67,6 @@ export class Onboard0 extends Component {
             <View style={{width:'100%',height:'100%',justifyContent : 'center'}}>
                 <Image source={require('../../images/maps/12-lijiang.jpg') }  resizeMode="cover" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
-                <StatusBar backgroundColor="#34315a"  />
-
-
-
-
 
                 <View style={{flexDirection: 'column', alignItems: 'center', marginBottom: 50}}>
                     <Image source={require('../../images/app_icon.png')} style={{width: 180, height: 180}}/>
@@ -88,7 +83,12 @@ export class Onboard0 extends Component {
                     <View style={{flexDirection: 'row', marginTop: 20}}>
                         <StyledButton title="Get Started" onPress={()=> {this.continue()}}
                                       enabled={true}
-                                      style={{width: '80%', height: 40, backgroundColor: Colors.lightBlue}}
+                                      style={{
+                                          width: '80%',
+                                          height: 40,
+                                          backgroundColor: Colors.lightBlue,
+                                          borderRadius : 20
+                                      }}
                                       textStyle={{
                                           fontSize: 16,
                                           fontWeight: 'bold',

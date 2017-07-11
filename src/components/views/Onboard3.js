@@ -120,14 +120,14 @@ export class Onboard3 extends Component {
                         style={styles.myInput}
                         placeholder="Username"
                         underlineColorAndroid="transparent"
-                        placeholderTextColor="rgba(255,255,255,.9)"
+                        placeholderTextColor="rgba(255,255,255,.7)"
                         onChangeText={(text) => {this.setState({username:text})} }
                     />
                     <TextInput
                         style={styles.myInput }
                         underlineColorAndroid="transparent"
                         placeholder="Password"
-                        placeholderTextColor="rgba(255,255,255,.9)"
+                        placeholderTextColor="rgba(255,255,255,.7)"
                         secureTextEntry={true}
                         onChangeText={(text) => {this.setState({password:text})} }
                     />
@@ -135,11 +135,23 @@ export class Onboard3 extends Component {
 
                         <StyledButton title="Sign Up" onPress={()=>{this.signUp()}}
                                       enabled={true}
-                                      style={{width: '50%', height : 40,backgroundColor: '#00a5e2'  }}
+                                      style={{
+                                          width: '50%',
+                                          height : 40,
+                                          backgroundColor: '#00a5e2',
+                                          borderTopLeftRadius : 20,
+                                          borderBottomLeftRadius : 20
+                                      }}
                                       textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic' }}/>
                         <StyledButton title="Log In" onPress={()=>{this.login()}}
                                       enabled={true}
-                                      style={{width: '50%', height : 40,backgroundColor: '#ff9c00'  }}
+                                      style={{
+                                          width: '50%',
+                                          height : 40,
+                                          backgroundColor: '#ff9c00' ,
+                                          borderTopRightRadius : 20,
+                                          borderBottomRightRadius : 20
+                                      }}
                                       textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic'}}/>
                     </View>
 
@@ -157,6 +169,7 @@ export class Onboard3 extends Component {
 
 const styles = StyleSheet.create({
     myInput : {
+        borderRadius : 8,
         height : 50,
         paddingLeft : 10,
         paddingRight : 10,

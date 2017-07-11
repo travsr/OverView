@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    StatusBar
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { DataManager } from '../../data/DataManager';
@@ -53,7 +54,9 @@ export class Startup extends Component {
     render() {
 
         return (
-            <View/>
+            <View>
+                <StatusBar backgroundColor="#34315a"  />
+            </View>
         );
     }
 }

@@ -112,7 +112,12 @@ export class Onboard2 extends Component {
 
                     <StyledButton title="Next" onPress={()=> {this.continue()}}
                                   enabled={true}
-                                  style={{width: '40%', height: 40, backgroundColor: Colors.lightBlue}}
+                                  style={{
+                                      width: '40%',
+                                      height: 40,
+                                      backgroundColor: Colors.lightBlue,
+                                      borderRadius : 20
+                                  }}
                                   textStyle={{
                                       fontSize: 16,
                                       fontWeight: 'bold',
