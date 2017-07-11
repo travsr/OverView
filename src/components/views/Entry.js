@@ -48,7 +48,7 @@ export class Entry extends Component {
         this.state = {
             selectedMapObject : null,
             selectedCharacters : [],
-            selectedResult : null,
+            selectedResult : "win",
             myPerf : null,
             teamPerf : null,
             matchNotes : null,
@@ -81,7 +81,7 @@ export class Entry extends Component {
         this.setState({
             selectedMapObject : null,
             selectedCharacters : [],
-            selectedResult : null,
+            selectedResult : "win",
             myPerf : null,
             teamPerf : null,
             matchNotes : null,

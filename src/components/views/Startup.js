@@ -26,23 +26,23 @@ export class Startup extends Component {
 
             // If a user is logged in let's immediately go to the main screen
             if(user) {
-                this.props.navigation.navigate('MainTabs');
+                //this.props.navigation.navigate('MainTabs');
                 // Reset the navigation stack so we can't go back to login
                 const resetAction = NavigationActions.reset({
                     index: 0,
                     actions: [NavigationActions.navigate({ routeName: 'MainTabs'})]
                 });
-                //this.props.navigation.dispatch(resetAction);
+                this.props.navigation.dispatch(resetAction);
             }
             // Otherwise show the login screen
             else {
-                this.props.navigation.navigate('Onboard');
+                //this.props.navigation.navigate('Onboard');
                 // Reset the navigation stack so we can't go back to login
                 const resetAction = NavigationActions.reset({
                     index: 0,
                     actions: [NavigationActions.navigate({ routeName: 'Onboard'})]
                 });
-                //this.props.navigation.dispatch(resetAction);
+                this.props.navigation.dispatch(resetAction);
             }
 
 

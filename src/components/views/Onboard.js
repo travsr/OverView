@@ -6,11 +6,14 @@ import {
     Text,
     Button,
     StyleSheet,
-    StatusBar
+    StatusBar,
+    Linking,
+    TouchableOpacity
 } from 'react-native';
 
 import {StyledButton} from '../presentation/StyledButton';
 import { NavigationActions } from 'react-navigation';
+import {Colors} from '../../data/Styles';
 
 
 let Parse = require('parse/react-native');
@@ -52,6 +55,7 @@ export class Onboard extends Component {
     }
     signUp() {
 
+
     }
     render() {
 
@@ -60,36 +64,35 @@ export class Onboard extends Component {
                 <Image source={require('../../images/maps/12-lijiang.jpg') }  resizeMode="cover" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
                 <StatusBar backgroundColor="#34315a"  />
-                <View style={{flexDirection : 'column', padding : 20 }}>
 
+                <View style={{position:'absolute',bottom:20,left:20,right:20,flexDirection:'row',flexWrap:'wrap',alignItems: 'center', justifyContent : 'center', marginTop : 20}}>
+                    <Text style={{color : '#fff' }}>By clicking "Get Started" you agree to our</Text>
+                    <TouchableOpacity onPress={()=>{Linking.openURL("https://overlog.herokuapp.com/tos.html")}}>
+                        <Text style={{ color : Colors.orange }}> Terms of Service</Text>
+                    </TouchableOpacity>
+                    <Text style={{color : '#fff' }}> and </Text>
+                    <TouchableOpacity onPress={()=>{Linking.openURL("https://overlog.herokuapp.com/privacy.html")}}>
+                        <Text style={{color : Colors.orange }}>Privacy Policy</Text>
+                    </TouchableOpacity>
+                </View>
 
-                    <TextInput
-                        style={styles.myInput}
-                        placeholder="Username"
-                        underlineColorAndroid="transparent"
-                        placeholderTextColor="#6b66a0"
-                        onChangeText={(text) => {this.setState({username:text})} }
-                    />
-                    <TextInput
-                        style={styles.myInput }
-                        underlineColorAndroid="transparent"
-                        placeholder="Password"
-                        placeholderTextColor="#6b66a0"
-                        secureTextEntry={true}
-                        onChangeText={(text) => {this.setState({password:text})} }
-                    />
-                    <View style={{flexDirection : 'row'}}>
-                        <StyledButton title="Sign Up" onPress={()=>{this.signUp()}}
-                                      enabled={true}
-                                      style={{width: '50%', height : 40,backgroundColor: '#00a5e2'  }}
-                                      textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic' }}/>
-                        <StyledButton title="Log In" onPress={()=>{this.login()}}
-                                      enabled={true}
-                                      style={{width: '50%', height : 40,backgroundColor: '#ff9c00'  }}
-                                      textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic'}}/>
+                <View style={{flexDirection : 'column', alignItems : 'center', marginBottom:50    }}>
+
+                    <Image source={require('../../images/app_icon.png')} style={{width: 180, height: 180}} />
+                    <View style={{flexDirection: 'row'}}>
+                        <Text style={{color : '#fff',fontStyle:'italic',fontSize : 70  ,fontWeight: 'bold',marginTop : -10}}>Over</Text>
+                        <Text style={{color : Colors.orange,fontStyle:'italic',fontSize : 30,fontWeight: 'bold'}}>LOG</Text>
                     </View>
 
-                    <Text style={{marginTop : 20 }}>By signing up you agree to our Terms of Service and Privacy Policy</Text>
+
+
+                    <View style={{flexDirection : 'row',marginTop:20}}>
+                        <StyledButton title="Get Started" onPress={()=>{this.signUp()}}
+                                      enabled={true}
+                                      style={{width: '80%', height : 40,backgroundColor: Colors.lightBlue  }}
+                                      textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic' }}/>
+                    </View>
+
 
                 </View>
             </View>

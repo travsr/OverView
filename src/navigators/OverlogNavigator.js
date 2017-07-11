@@ -20,6 +20,7 @@ import {
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Startup } from '../components/views/Startup';
 import { Entry } from '../components/views/Entry';
+import { Settings } from '../components/views/Settings';
 import { History } from '../components/views/History';
 import { Onboard } from '../components/views/Onboard';
 import { DataManager } from '../data/DataManager';
@@ -29,9 +30,7 @@ let Parse = require('parse/react-native');
 Parse.initialize("OverLog");
 Parse.serverURL = 'https://overlog.herokuapp.com/parse';
 
-
 let dataManager = new DataManager();
-
 
 let labelStyle = {};
 
@@ -43,16 +42,18 @@ if(Platform.OS === 'ios') {
 const MainTabs = TabNavigator({
     EntryNew: { screen : Entry  },
     History : { screen : History },
+    Settings : { screen : Settings }
 }, {
     tabBarOptions : {
         style : {
             backgroundColor : '#000',
         },
-        labelStyle : labelStyle,
         indicatorStyle : {
             backgroundColor : '#ff9c00'
         },
-        activeTintColor : '#ff9c00'
+        activeTintColor : '#ff9c00',
+        showLabel :  false ,
+        showIcon : true
     }
 });
 
@@ -66,10 +67,11 @@ Parse.User.currentAsync().then((user) => {
 });
 
 export const OverlogNavigator = StackNavigator({
+    Startup : {screen : Startup},
     Onboard :  {screen : Onboard  },
     MainTabs : {screen : MainTabs }
 },{
-    initialRouteName : "MainTabs",
+    initialRouteName : "Onboard",
     headerMode : "none"
 });
 
