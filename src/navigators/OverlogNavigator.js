@@ -22,8 +22,14 @@ import { Startup } from '../components/views/Startup';
 import { Entry } from '../components/views/Entry';
 import { Settings } from '../components/views/Settings';
 import { History } from '../components/views/History';
-import { Onboard } from '../components/views/Onboard';
+
 import { DataManager } from '../data/DataManager';
+
+import { Onboard0 } from '../components/views/Onboard0';
+import { Onboard1 } from '../components/views/Onboard1';
+import { Onboard2 } from '../components/views/Onboard2';
+
+import { Onboard3 } from '../components/views/Onboard3';
 
 // Init parse
 let Parse = require('parse/react-native');
@@ -39,6 +45,26 @@ if(Platform.OS === 'ios') {
     labelStyle.marginBottom = 16
 }
 
+
+
+// Onboard Tabs
+const OnboardTabs = TabNavigator({
+    Onboard0: { screen : Onboard0  },
+    Onboard1 : { screen : Onboard1 },
+    Onboard2 : { screen : Onboard2 },
+    Onboard3 : { screen : Onboard3 }
+}, {
+    tabBarOptions : {
+        style :  {
+            display :'none',
+        },
+        showLabel :  false ,
+        showIcon : false
+    }
+});
+
+
+// Main Tabs
 const MainTabs = TabNavigator({
     EntryNew: { screen : Entry  },
     History : { screen : History },
@@ -52,8 +78,8 @@ const MainTabs = TabNavigator({
             backgroundColor : '#ff9c00'
         },
         activeTintColor : '#ff9c00',
-        showLabel :  false ,
-        showIcon : true
+        showLabel :  true   ,
+        showIcon : false
     }
 });
 
@@ -68,10 +94,10 @@ Parse.User.currentAsync().then((user) => {
 
 export const OverlogNavigator = StackNavigator({
     Startup : {screen : Startup},
-    Onboard :  {screen : Onboard  },
+    Onboard :  {screen : OnboardTabs  },
     MainTabs : {screen : MainTabs }
 },{
-    initialRouteName : "Onboard",
+    initialRouteName : "Startup",
     headerMode : "none"
 });
 

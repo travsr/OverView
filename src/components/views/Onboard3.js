@@ -18,13 +18,14 @@ import {Colors} from '../../data/Styles';
 
 let Parse = require('parse/react-native');
 
-export class Onboard extends Component {
+export class Onboard3 extends Component {
     constructor(props) {
         super(props) ;
 
         this.state = {
             username : "",
-            password : ""
+            password : "",
+            screen : 0
         };
 
     }
@@ -39,7 +40,6 @@ export class Onboard extends Component {
 
             console.log("logged in");
             console.log(user.get("username"));
-            this.props.navigation.navigate('MainTabs');
 
             // Reset the navigation stack so we can't go back to login
             const resetAction = NavigationActions.reset({
@@ -56,6 +56,33 @@ export class Onboard extends Component {
     signUp() {
 
 
+        let user = new Parse.User();
+        user.set("username", this.state.username);
+        user.set("password", this.state.password);
+
+        user.signUp({username : this.state.username, password: this.state.password}).then((user)=> {
+
+            console.log("logged in");
+            console.log(user.get("username"));
+
+            // Reset the navigation stack so we can't go back to login
+            const resetAction = NavigationActions.reset({
+                index: 0,
+                actions: [NavigationActions.navigate({ routeName: 'MainTabs'})]
+            });
+            this.props.navigation.dispatch(resetAction);
+
+        }, (error) => {
+            console.log(error);
+        });
+    }
+    continue() {
+
+        //this.props.navigation.navigate('MainTabs');
+        this.setState({screen : this.state.screen+1});
+
+
+
     }
     render() {
 
@@ -65,8 +92,9 @@ export class Onboard extends Component {
 
                 <StatusBar backgroundColor="#34315a"  />
 
+
                 <View style={{position:'absolute',bottom:20,left:20,right:20,flexDirection:'row',flexWrap:'wrap',alignItems: 'center', justifyContent : 'center', marginTop : 20}}>
-                    <Text style={{color : '#fff' }}>By clicking "Get Started" you agree to our</Text>
+                    <Text style={{color : '#fff' }}>By signing up you agree to our</Text>
                     <TouchableOpacity onPress={()=>{Linking.openURL("https://overlog.herokuapp.com/tos.html")}}>
                         <Text style={{ color : Colors.orange }}> Terms of Service</Text>
                     </TouchableOpacity>
@@ -76,25 +104,47 @@ export class Onboard extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={{flexDirection : 'column', alignItems : 'center', marginBottom:50    }}>
-
-                    <Image source={require('../../images/app_icon.png')} style={{width: 180, height: 180}} />
-                    <View style={{flexDirection: 'row'}}>
-                        <Text style={{color : '#fff',fontStyle:'italic',fontSize : 70  ,fontWeight: 'bold',marginTop : -10}}>Over</Text>
-                        <Text style={{color : Colors.orange,fontStyle:'italic',fontSize : 30,fontWeight: 'bold'}}>LOG</Text>
-                    </View>
 
 
 
-                    <View style={{flexDirection : 'row',marginTop:20}}>
-                        <StyledButton title="Get Started" onPress={()=>{this.signUp()}}
+
+
+                <View style={{flexDirection : 'column', padding : 20 }}>
+
+
+                    <TextInput
+                        style={styles.myInput}
+                        placeholder="Username"
+                        underlineColorAndroid="transparent"
+                        placeholderTextColor="#fff"
+                        onChangeText={(text) => {this.setState({username:text})} }
+                    />
+                    <TextInput
+                        style={styles.myInput }
+                        underlineColorAndroid="transparent"
+                        placeholder="Password"
+                        placeholderTextColor="#fff"
+                        secureTextEntry={true}
+                        onChangeText={(text) => {this.setState({password:text})} }
+                    />
+                    <View style={{flexDirection : 'row'}}>
+
+                        <StyledButton title="Sign Up" onPress={()=>{this.signUp()}}
                                       enabled={true}
-                                      style={{width: '80%', height : 40,backgroundColor: Colors.lightBlue  }}
+                                      style={{width: '50%', height : 40,backgroundColor: '#00a5e2'  }}
                                       textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic' }}/>
+                        <StyledButton title="Log In" onPress={()=>{this.login()}}
+                                      enabled={true}
+                                      style={{width: '50%', height : 40,backgroundColor: '#ff9c00'  }}
+                                      textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic'}}/>
                     </View>
-
 
                 </View>
+
+
+
+
+
             </View>
         );
     }
