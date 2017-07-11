@@ -17,6 +17,7 @@ import { StyledButton } from '../presentation/StyledButton';
 import { DataManager } from '../../data/DataManager';
 import { CharacterPortrait } from '../presentation/CharacterPortrait';
 import { MapThumbnail } from '../presentation/MapThumbnail';
+import { Colors } from '../../data/Styles';
 let TimeAgo = require('react-native-timeago');
 
 export class ResultHeader extends Component {
@@ -24,21 +25,14 @@ export class ResultHeader extends Component {
     constructor(props) {
         super(props);
 
-        let resultMap = this.props.logEntries.map((entry, index) => {
-            return entry.get('result');
-        });
+        // let resultMap = this.props.logEntries.map((entry, index) => {
+        //     return entry.get('result');
+        // });
 
-        this.state = {resultMap:resultMap, sessionModalVisible : false};
-
-        this.showSessionModal = this.showSessionModal.bind(this);
+        this.state = {sessionModalVisible : false};
     }
 
     dataManager = new DataManager();
-
-    showSessionModal() {
-        console.log("choose session clicked");
-        this.setState({sessionModalVisible : true});
-    }
 
     getCharacterFromName(name) {
         if(this.dataManager.serverDataModel.characters) {
@@ -80,11 +74,13 @@ export class ResultHeader extends Component {
 
         let characterResults = {};
         let mapResults = {};
+        let summary = [];
 
-        if(this.props.session.get) {
+        if(this.props.session && this.props.session.get) {
             recordText = this.props.session.get('win') + "-" + this.props.session.get('loss') + "-" + this.props.session.get('draw');
             characterResults = this.props.session.get('characterResults');
             mapResults = this.props.session.get('mapResults');
+            summary = this.props.session.get('summary');
         }
 
         return (
@@ -94,7 +90,7 @@ export class ResultHeader extends Component {
                     <Text style={styles.recordText}>{recordText}</Text>
                     <TimeAgo style={{color:'#fff',marginTop:0, width: '100%', textAlign: 'center'}}
                              time={this.props.session ? this.props.session.createdAt : new Date().getTime()} />
-                    <SessionVis logEntries={this.props.logEntries}
+                    <SessionVis summary={summary}
                                 style={{width:'80%', height: 20, marginTop: 10 }}/>
                     <View style={{width: '80%', marginTop : 10, flexDirection: 'row',flexWrap:'wrap'}}>
                         {
@@ -131,24 +127,9 @@ export class ResultHeader extends Component {
                     </View>
                 </View>
 
-                <StyledButton
-                    style={{position:'absolute',right:0,bottom:0, width : 120, height: 80, backgroundColor : 'transparent'}}
-                    textStyle={{color : '#fff'}}
-                    title={"View Session History"}
-                    enabled={true}
-                    onPress={this.showSessionModal}
-                />
+
 
                 <View style={styles.inlayShadow} elevation={20}/>
-
-
-                <Modal
-                        visible={this.state.sessionModalVisible}
-                        onRequestClose={()=>{this.setState({sessionModalVisible : false})}}
-                        animationType="slide">
-                    <SessionHistory
-                            sessions={this.dataManager.serverDataModel.logSessions} />
-                </Modal>
 
             </View>
         );
@@ -158,7 +139,8 @@ export class ResultHeader extends Component {
 const styles = StyleSheet.create({
     container : {
         width : '100%',
-        backgroundColor :'rgba(97, 91, 181, .5)'
+        backgroundColor :'rgba(97, 91, 181, .5)',
+        paddingBottom : 20
     },
     containerBg : {
         position: 'absolute',

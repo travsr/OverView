@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     Text,
     Image,
-    StyleSheet
+    StyleSheet,
+    Linking
 } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { DataManager } from '../../data/DataManager';
@@ -34,6 +35,16 @@ export class Settings extends Component {
 
     }
 
+    logOut() {
+        Parse.User.logOut();
+        // Reset the navigation stack so we can't go back to login
+        const resetAction = NavigationActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: 'Onboard'})]
+        });
+        this.props.navigation.dispatch(resetAction);
+    }
+
 
     render() {
 
@@ -46,8 +57,22 @@ export class Settings extends Component {
             <ScrollView style={{ flex : 1}}>
                 <View style={{marginLeft: 14, marginRight : 14, marginTop: 0, marginBottom : 0}}>
                     <TouchableOpacity style={styles.menuOption}
-                                      onPress={()=>{this.props.navigation.navigate('Onboard');}}>
+                                      onPress={()=>{
+                                          this.logOut();
+                                      }}>
                         <Text style={styles.menuOptionText}>Log Out</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuOption}
+                                      onPress={()=>{
+                                          Linking.openURL("https://overlog.herokuapp.com/privacy.html");
+                                      }}>
+                        <Text style={styles.menuOptionText}>Privacy Policy</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuOption}
+                                      onPress={()=>{
+                                          Linking.openURL("https://overlog.herokuapp.com/tos.html");
+                                      }}>
+                        <Text style={styles.menuOptionText}>Terms of Service</Text>
                     </TouchableOpacity>
 
                 </View>

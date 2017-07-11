@@ -4,12 +4,16 @@ import {
     Image,
     ListView,
     RefreshControl,
-    Text
+    Text,
+    Modal,
 } from 'react-native';
 
 import {ResultViewer} from '../container/ResultViewer';
 import {ResultHeader} from '../container/ResultHeader';
 import { DataManager } from '../../data/DataManager';
+import { StyledButton } from '../presentation/StyledButton';
+import { SessionHistory } from '../views/SessionHistory';
+import { Colors } from '../../data/Styles';
 
 export class History extends Component {
 
@@ -30,12 +34,15 @@ export class History extends Component {
             currentUser : null,
             logEntries : ds.cloneWithRows([]),
             refreshing : false,
-            selectedSessionIndex : 0
+            selectedSessionIndex : 0,
+            sessionModalVisible: false
         };
 
-        this.dataManager.onAfterLoad(() => {
+        this.dataManager.onDataChange(() => {
             this.setState(this.state);
         });
+
+        this.showSessionModal = this.showSessionModal.bind(this);
 
     }
     _onRefresh() {
@@ -48,6 +55,10 @@ export class History extends Component {
             .done(()=> {
                 this.setState({refreshing: false});
             });
+    }
+    showSessionModal() {
+        console.log("choose session clicked");
+        this.setState({sessionModalVisible : true});
     }
     render() {
 
@@ -82,6 +93,28 @@ export class History extends Component {
                         />
                     }
                 />
+
+                <StyledButton
+                    style={{
+                        position:'absolute',
+                        right:10,bottom:10,
+                        width : 120,
+                        height: 30,
+                        backgroundColor : Colors.lightBlue,
+                        borderRadius : 30}}
+                    textStyle={{color : '#fff'}}
+                    title={"Previous Sessions"}
+                    enabled={true}
+                    onPress={this.showSessionModal}
+                />
+
+                <Modal
+                    visible={this.state.sessionModalVisible}
+                    onRequestClose={()=>{this.setState({sessionModalVisible : false})}}
+                    animationType="slide">
+                    <SessionHistory
+                        sessions={this.dataManager.serverDataModel.logSessions} />
+                </Modal>
 
             </View>
         );

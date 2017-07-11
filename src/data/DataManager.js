@@ -22,9 +22,7 @@ export class DataManager{
         // If no instance exists create one and make calls to get the data
         if(!instance) {
             instance = this;
-            this.getServerDataModel().then(() => {
-                this.callbacks.forEach((cb,i) => { cb(); });
-            });
+            this.getServerDataModel();
         }
 
         // to test whether we have singleton or not
@@ -33,9 +31,7 @@ export class DataManager{
         return instance;
     }
 
-    onAfterLoad(cb) {
-        this.callbacks.push(cb);
-    }
+
 
     onDataChange(cb) {
         this.callbacks.push(cb);
@@ -57,7 +53,10 @@ export class DataManager{
             .then(() => Promise.all([
                 this.getCharacters(),
                 this.getMaps(),
-            ]));
+            ]))
+            .then(() => {
+                this.dispatchOnDataChangeEvent();
+            })
     }
 
     getCurrentUser() {
@@ -70,8 +69,12 @@ export class DataManager{
                 console.log("Got user");
                 console.log(user.get('username'));
                 if(user) {
-                    this.serverDataModel.currentUser = user;
-                    resolve(user);
+                    user.fetch().then(()=>{
+                        this.serverDataModel.currentUser = user;
+                        resolve(user);
+
+                    });
+
                 }
                 else {
                     reject("Not logged in");
@@ -200,7 +203,9 @@ export class DataManager{
                 q.limit(1000);
                 q.find().then((entries) => {
                     this.serverDataModel.selectedLogEntries = entries;
+
                     resolve(entries);
+                    this.dispatchOnDataChangeEvent();
                 }, (err) => {
                     reject(err);
                 });

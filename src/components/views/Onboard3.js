@@ -95,11 +95,15 @@ export class Onboard3 extends Component {
 
                 <View style={{position:'absolute',bottom:20,left:20,right:20,flexDirection:'row',flexWrap:'wrap',alignItems: 'center', justifyContent : 'center', marginTop : 20}}>
                     <Text style={{color : '#fff' }}>By signing up you agree to our</Text>
-                    <TouchableOpacity onPress={()=>{Linking.openURL("https://overlog.herokuapp.com/tos.html")}}>
+                    <TouchableOpacity onPress={()=>{
+                                Linking.openURL("https://overlog.herokuapp.com/tos.html");
+                            }}>
                         <Text style={{ color : Colors.orange }}> Terms of Service</Text>
                     </TouchableOpacity>
                     <Text style={{color : '#fff' }}> and </Text>
-                    <TouchableOpacity onPress={()=>{Linking.openURL("https://overlog.herokuapp.com/privacy.html")}}>
+                    <TouchableOpacity onPress={()=>{
+                                Linking.openURL("https://overlog.herokuapp.com/privacy.html");
+                            }}>
                         <Text style={{color : Colors.orange }}>Privacy Policy</Text>
                     </TouchableOpacity>
                 </View>
@@ -109,21 +113,21 @@ export class Onboard3 extends Component {
 
 
 
-                <View style={{flexDirection : 'column', padding : 20 }}>
+                <View style={{flexDirection : 'column', paddingLeft : 40, paddingRight : 40 }}>
 
 
                     <TextInput
                         style={styles.myInput}
                         placeholder="Username"
                         underlineColorAndroid="transparent"
-                        placeholderTextColor="#fff"
+                        placeholderTextColor="rgba(255,255,255,.9)"
                         onChangeText={(text) => {this.setState({username:text})} }
                     />
                     <TextInput
                         style={styles.myInput }
                         underlineColorAndroid="transparent"
                         placeholder="Password"
-                        placeholderTextColor="#fff"
+                        placeholderTextColor="rgba(255,255,255,.9)"
                         secureTextEntry={true}
                         onChangeText={(text) => {this.setState({password:text})} }
                     />
@@ -154,6 +158,8 @@ export class Onboard3 extends Component {
 const styles = StyleSheet.create({
     myInput : {
         height : 50,
+        paddingLeft : 10,
+        paddingRight : 10,
         width : '100%',
         backgroundColor : 'rgba(0,0,0,.3)',
         color: '#fff',

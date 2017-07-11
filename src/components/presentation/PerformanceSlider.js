@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         backgroundColor : 'transparent',
         textAlign : 'center',
-        fontSize : 11
+        fontSize : 11,
+        color : '#FFF'
     },
     rankText : {
         textAlign: 'center',

@@ -46,6 +46,8 @@ export class Entry extends Component {
 
         // Initialize all the things that we need to keep in our state
         this.state = {
+            thrower : false,
+            leaver : false,
             selectedMapObject : null,
             selectedCharacters : [],
             selectedResult : "win",
@@ -58,7 +60,7 @@ export class Entry extends Component {
             mapResults : {},
         };
 
-        this.dataManager.onAfterLoad(()=> {
+        this.dataManager.onDataChange(()=> {
             this.setState(this.state);
 
             this.setState({
@@ -79,6 +81,8 @@ export class Entry extends Component {
     }
     resetState() {
         this.setState({
+            thrower : false,
+            leaver : false,
             selectedMapObject : null,
             selectedCharacters : [],
             selectedResult : "win",
@@ -111,7 +115,9 @@ export class Entry extends Component {
             mapType : this.state.selectedMapObject.get('type'),
             mapName : this.state.selectedMapObject.get('name'),
             ratingMe : Math.round( this.state.myPerf/14 * 100 ),
-            ratingTeam : Math.round( this.state.teamPerf/14 * 100) // normalize ratings
+            ratingTeam : Math.round( this.state.teamPerf/14 * 100), // normalize ratings
+            thrower : this.state.thrower,
+            leaver : this.state.leaver
         }).then(() => {
 
             this.dataManager.getLogSessions()
@@ -120,15 +126,16 @@ export class Entry extends Component {
                     // navigate to the history page
                     this.props.navigation.navigate("History");
 
-                    setTimeout(()=>{
-                        this.setState({
-                            characterResults : this.dataManager.serverDataModel.currentUser.get('characterResults'),
-                            mapResults : this.dataManager.serverDataModel.currentUser.get('mapResults')
-                        });
+                    this.dataManager.getCurrentUser()
+                        .then(()=>{
+                            this.setState({
+                                characterResults : this.dataManager.serverDataModel.currentUser.get('characterResults'),
+                                mapResults : this.dataManager.serverDataModel.currentUser.get('mapResults')
+                            });
 
-                        // reset the selected values
-                        this.resetState();
-                    },200) ;
+                            // reset the selected values
+                            this.resetState();
+                        }) ;
                 });
 
         },(err) => {
@@ -190,47 +197,63 @@ export class Entry extends Component {
                         result={this.state.selectedResult}
                     />
 
-                    <View style={{margin:0, flexDirection : 'row', flexWrap: 'wrap'}}>
+                    <View style={{margin:0, flexDirection : 'row', flexWrap: 'wrap',backgroundColor: 'rgba(97, 91, 181, .3 )', paddingBottom : 100 }}>
 
-                        <View style={{padding : 10, width: '100%',backgroundColor: 'rgba(97, 91, 181, .0)' }}>
+                        {/* match notes */}
+                        <View style={{padding : 10, width: '100%',backgroundColor: 'rgba(97, 91, 181, .6 )', borderTopWidth : 1, borderTopColor : 'rgba(255,255,255,.3)',  borderBottomWidth : 1, borderBottomColor : 'rgba(255,255,255,.3)' }}>
                             <TextInput
                                 onChangeText={this.onMatchNotesChange}
-                                style={{height: 50,width:'100%' }}
-                                placeholder="Match Notes"
+                                style={{height: 50,width:'100%',color: "#FFF" }}
+                                placeholder="Write some match notes..."
+                                placeholderTextColor="rgba(255,255,255,.7) "
+                                underlineColorAndroid="transparent"
                             />
                         </View>
 
-                        <View elevation={10} style={{width: '100%',padding : 10, flexDirection : 'row', justifyContent : 'center'}}>
+                        <View elevation={10} style={{width: '100%',padding : 10, flexDirection : 'row', justifyContent : 'center', paddingTop : 20}}>
 
+                            {/* thrower switch */}
                             <View style={{width : '33%', justifyContent : 'center', flexDirection: 'row',flexWrap:'wrap' }}>
                                 <Switch
-                                    onValueChange={(value) => {}}
-                                    value={true} />
-                                <Text style={{textAlign:'center',backgroundColor :'transparent', width: '100%', fontSize : 11}}>Thrower</Text>
+                                    onValueChange={(value) => {
+                                        this.setState({thrower : value})
+                                    }}
+                                    value={this.state.thrower} />
+                                <Text style={{textAlign:'center',backgroundColor :'transparent', width: '100%', fontSize : 11, color : '#fff'}}>Thrower</Text>
                             </View>
+
+                            {/* leaver switch */}
                             <View style={{width : '33%', justifyContent : 'center', flexDirection: 'row',flexWrap:'wrap' }}>
                                 <Switch
-                                    onValueChange={(value) => {}}
-                                    value={true} />
-                                <Text style={{textAlign:'center',backgroundColor :'transparent', width: '100%', fontSize : 11}}>Leaver</Text>
+                                    onValueChange={(value) => {
+                                        this.setState({leaver: value})
+                                    }}
+                                    value={this.state.leaver} />
+                                <Text style={{textAlign:'center',backgroundColor :'transparent', width: '100%', fontSize : 11, color : '#fff'}}>Leaver</Text>
                             </View>
+
+                            {/* sr rating */}
                             <View style={{width : '33%', justifyContent : 'center', flexDirection: 'row',flexWrap:'wrap' }}>
 
                                 <TextInput
                                     keyboardType="numeric"
-                                    style={{height: 50,width:'100%' }}
+                                    style={{height: 50,width:'100%', color : '#fff' }}
                                     placeholder="SR Rating"
+                                    placeholderTextColor="#FFF"
                                 />
                             </View>
 
                         </View>
 
+                        {/* my performance */}
                         <View style={{width:'50%',margin: 0,  padding: 4,backgroundColor : 'rgba(0, 0, 0, .01)', borderColor : 'rgba(97, 91, 181, 0)', borderTopWidth: 1, borderBottomWidth:1, borderRightWidth:1}}>
                             <PerformanceSlider
                                 value={this.state.myPerf}
                                 onChange={this.onMyPerfChange}
                                 text="My Gameplay"/>
                         </View>
+
+                        {/* team performance */}
                         <View style={{width:'50%', margin : 0, padding: 4, backgroundColor : 'rgba(0,0,0,.01)', borderColor : 'rgba(97, 91, 181, 0)', borderTopWidth: 1, borderBottomWidth:1,}}>
                             <PerformanceSlider
                                 value={this.state.teamPerf}
@@ -240,7 +263,6 @@ export class Entry extends Component {
 
                     </View>
 
-                    <View style={{height:100}}></View>
 
                 </ScrollView>
                 </KeyboardAvoidingView>
