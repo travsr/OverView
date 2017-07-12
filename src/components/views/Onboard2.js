@@ -67,8 +67,6 @@ export class Onboard2 extends Component {
             <View style={{width:'100%',height:'100%',justifyContent : 'center'}}>
                 <Image source={require('../../images/maps/12-lijiang.jpg') }  resizeMode="cover" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
-                <StatusBar backgroundColor="#34315a"  />
-
                 {
                     this.state.screen == 2 &&
                     <View style={{position:'absolute',bottom:20,left:20,right:20,flexDirection:'row',flexWrap:'wrap',alignItems: 'center', justifyContent : 'center', marginTop : 20}}>
@@ -95,7 +93,8 @@ export class Onboard2 extends Component {
                         color: '#fff',
                         fontSize: 20,
                         fontWeight : 'bold',
-                        marginTop: 18
+                        marginTop: 18,
+                        backgroundColor : 'transparent'
                     }}>View Past Sessions</Text>
 
 
@@ -107,7 +106,8 @@ export class Onboard2 extends Component {
                         marginTop: 0,
                         marginLeft: 20,
                         marginRight: 20,
-                        marginBottom : 20
+                        marginBottom : 20,
+                        backgroundColor : 'transparent'
                     }}>Every gaming session's history is stored for later review and analysis.</Text>
 
                     <StyledButton title="Next" onPress={()=> {this.continue()}}

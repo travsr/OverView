@@ -90,21 +90,19 @@ export class Onboard3 extends Component {
             <View style={{width:'100%',height:'100%',justifyContent : 'center'}}>
                 <Image source={require('../../images/maps/12-lijiang.jpg') }  resizeMode="cover" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
-                <StatusBar backgroundColor="#34315a"  />
-
 
                 <View style={{position:'absolute',bottom:20,left:20,right:20,flexDirection:'row',flexWrap:'wrap',alignItems: 'center', justifyContent : 'center', marginTop : 20}}>
-                    <Text style={{color : '#fff' }}>By signing up you agree to our</Text>
+                    <Text style={{color : '#fff',backgroundColor:'transparent' }}>By signing up you agree to our</Text>
                     <TouchableOpacity onPress={()=>{
                                 Linking.openURL("https://overlog.herokuapp.com/tos.html");
                             }}>
-                        <Text style={{ color : Colors.orange }}> Terms of Service</Text>
+                        <Text style={{ color : Colors.orange,backgroundColor:'transparent' }}> Terms of Service</Text>
                     </TouchableOpacity>
-                    <Text style={{color : '#fff' }}> and </Text>
+                    <Text style={{color : '#fff',backgroundColor:'transparent' }}> and </Text>
                     <TouchableOpacity onPress={()=>{
                                 Linking.openURL("https://overlog.herokuapp.com/privacy.html");
                             }}>
-                        <Text style={{color : Colors.orange }}>Privacy Policy</Text>
+                        <Text style={{color : Colors.orange,backgroundColor:'transparent' }}>Privacy Policy</Text>
                     </TouchableOpacity>
                 </View>
 

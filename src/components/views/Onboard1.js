@@ -46,12 +46,6 @@ export class Onboard1 extends Component {
             <View style={{width:'100%',height:'100%',justifyContent : 'center'}}>
                 <Image source={require('../../images/maps/12-lijiang.jpg') }  resizeMode="cover" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
-                <StatusBar backgroundColor="#34315a"  />
-
-
-
-
-
                 <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: 0}}>
                     <Image source={require('../../images/screenshots/screen1.png')} style={{width: 180, height: 250}}/>
 
@@ -60,7 +54,8 @@ export class Onboard1 extends Component {
                         color: '#fff',
                         fontSize: 20,
                         fontWeight : 'bold',
-                        marginTop: 18
+                        marginTop: 18,
+                        backgroundColor : 'transparent'
                     }}>Record Match Data</Text>
 
                     <Text style={{
@@ -71,7 +66,8 @@ export class Onboard1 extends Component {
                         marginTop: 0,
                         marginLeft: 20,
                         marginRight: 20,
-                        marginBottom : 20
+                        marginBottom : 20,
+                        backgroundColor : 'transparent'
                     }}>Make smarter character decisions on-the-fly based on your previous match history.</Text>
 
                     <StyledButton title="Next" onPress={()=> {this.continue()}}
