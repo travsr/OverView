@@ -12,6 +12,8 @@ import {
 
 import { SessionItem } from '../container/SessionItem';
 import { ResultHeader } from '../container/ResultHeader' ;
+import { StyledButton } from '../presentation/StyledButton';
+import {Colors} from '../../data/Styles';
 
 
 export class SessionHistory extends Component {
@@ -36,6 +38,24 @@ export class SessionHistory extends Component {
                         <ResultHeader session={session} />
                     }
                 />
+
+                <StyledButton
+                    onPress={()=>{
+                        this.props.onClosePress();
+                    }}
+                    enabled={true}
+                    style={{
+                        position : 'absolute',
+                        top : 10, left: 10,
+                        height:30,
+                        width: 50,
+                        backgroundColor:Colors.lightBlue
+                    }}
+                    textStyle={{
+                        color:'#fff',
+                        fontSize:9
+                    }}
+                    title="back" />
             </View>
         );
     }

@@ -205,10 +205,10 @@ export class Entry extends Component {
                     <View style={{margin:0, flexDirection : 'row', flexWrap: 'wrap',backgroundColor: 'rgba(97, 91, 181, .3 )', paddingBottom : 100 }}>
 
                         {/* match notes */}
-                        <View style={{padding : 10, width: '100%',backgroundColor: 'rgba(97, 91, 181, .6 )', borderTopWidth : 1, borderTopColor : 'rgba(255,255,255,.3)',  borderBottomWidth : 1, borderBottomColor : 'rgba(255,255,255,.3)' }}>
+                        <View style={{padding : 5, width: '100%',backgroundColor: 'rgba(97, 91, 181, .6 )', borderTopWidth : 1, borderTopColor : 'rgba(255,255,255,.3)',  borderBottomWidth : 1, borderBottomColor : 'rgba(255,255,255,.3)' }}>
                             <TextInput
                                 onChangeText={this.onMatchNotesChange}
-                                style={{height: 50,width:'100%',color: "#FFF" }}
+                                style={{height: 40,width:'100%',color: "#FFF" }}
                                 placeholder="Write some match notes..."
                                 placeholderTextColor="rgba(255,255,255,.7) "
                                 underlineColorAndroid="transparent"
@@ -277,7 +277,7 @@ export class Entry extends Component {
                     onPress={this.addEntry}
                     title={this.state.btnSaveText}
                     enabled={this.state.btnSaveEnabled}
-                    style={{position: 'absolute',bottom : 0, left : 0, right : 0, height : 60,backgroundColor: '#00a5e2'  }}
+                    style={{position: 'absolute',bottom : 0, left : 0, right : 0, height : 50,backgroundColor: '#00a5e2'  }}
                     textStyle={{fontSize:20, fontWeight: 'bold',color:'#fff', fontStyle:'italic' }}/>
 
             </View>

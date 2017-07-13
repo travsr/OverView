@@ -60,6 +60,9 @@ export class History extends Component {
         console.log("choose session clicked");
         this.setState({sessionModalVisible : true});
     }
+    closeModal() {
+        this.setState({sessionModalVisible : false});
+    }
     render() {
 
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -113,6 +116,7 @@ export class History extends Component {
                     onRequestClose={()=>{this.setState({sessionModalVisible : false})}}
                     animationType="slide">
                     <SessionHistory
+                        onClosePress={()=>{this.closeModal();}}
                         sessions={this.dataManager.serverDataModel.logSessions} />
                 </Modal>
 
