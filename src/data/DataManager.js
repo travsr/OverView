@@ -72,6 +72,7 @@ export class DataManager{
                     user.fetch().then(()=>{
                         this.serverDataModel.currentUser = user;
                         resolve(user);
+                        this.dispatchOnDataChangeEvent();
 
                     });
 

@@ -64,10 +64,17 @@ export class ResultViewer extends Component {
                     <Image source={mapImgUri} style={styles.mapBg} resizeMode="cover"/>
                     <View style={styles.backdrop} />
                     <View style={styles.resultView}>
-                        <Text style={styles.resultText}>{this.props.entry.get('map').get('longName').toUpperCase()}</Text>
-                        <TimeAgo style={{color:'#fff'}} time={this.props.entry.get('createdAt').getTime()} />
+                        <Text style={styles.resultText}>
+                            {this.props.entry.get('map').get('longName').toUpperCase()}
+                        </Text>
+                        <TimeAgo
+                            style={{color:'#fff'}}
+                            time={this.props.entry.get('createdAt').getTime()}
+                        />
                     </View>
-                    <Text style={this.getIconStyle(result)} >{this.getIcon(result)}</Text>
+                    <Text style={this.getIconStyle(result)}>
+                        {this.getIcon(result)}
+                    </Text>
                     <View style={this.getResultStyle(result)} />
                     <View style={styles.thumbView}>
                         {characters.map((character, index) =>
@@ -150,8 +157,7 @@ const styles = StyleSheet.create({
     },
     backdrop : {
         position : 'absolute',
-
-        backgroundColor : 'rgba(0,0,0,.3)',
+        backgroundColor : 'rgba(0,0,0,.2)',
         top: 3, right : 6, left: 6, bottom :3
     },
     thumbView : {

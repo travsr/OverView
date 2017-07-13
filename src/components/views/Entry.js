@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
+    ActivityIndicator,
     StyleSheet,
     Text,
     Image,
@@ -60,6 +61,7 @@ export class Entry extends Component {
             mapResults : {},
         };
 
+
         this.dataManager.onDataChange(()=> {
             this.setState(this.state);
 
@@ -68,6 +70,9 @@ export class Entry extends Component {
                 mapResults : this.dataManager.serverDataModel.currentUser.get('mapResults')
             });
         });
+
+
+        this.dataManager.getCurrentUser();
 
 
         // bind 'this' to our delegates
@@ -174,7 +179,7 @@ export class Entry extends Component {
                     style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
                 />
 
-                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={-100}>
+                <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={-50}  >
 
                 <ScrollView style={{width:'100%',height:'100%'}} >
 
@@ -207,6 +212,7 @@ export class Entry extends Component {
                                 placeholder="Write some match notes..."
                                 placeholderTextColor="rgba(255,255,255,.7) "
                                 underlineColorAndroid="transparent"
+                                multiline={true}
                             />
                         </View>
 

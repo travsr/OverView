@@ -48,20 +48,16 @@ export class Settings extends Component {
 
     render() {
 
-        return (<View style={{ flex : 1, backgroundColor : '#fff'}}>
+        return (<View style={{ flex : 1, backgroundColor : 'rgb(97, 91, 181)'}}>
+
             <Image
                 source={require('../../images/app-bg2.png')}
                 resizeMode="cover"
-                style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
+                style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',opacity:.2}}
             />
             <ScrollView style={{ flex : 1}}>
-                <View style={{marginLeft: 14, marginRight : 14, marginTop: 0, marginBottom : 0}}>
-                    <TouchableOpacity style={styles.menuOption}
-                                      onPress={()=>{
-                                          this.logOut();
-                                      }}>
-                        <Text style={styles.menuOptionText}>Log Out</Text>
-                    </TouchableOpacity>
+                <View style={{marginLeft: 14, marginRight : 14, marginTop: 20, marginBottom : 0}}>
+
                     <TouchableOpacity style={styles.menuOption}
                                       onPress={()=>{
                                           Linking.openURL("https://overlog.herokuapp.com/privacy.html");
@@ -73,6 +69,12 @@ export class Settings extends Component {
                                           Linking.openURL("https://overlog.herokuapp.com/tos.html");
                                       }}>
                         <Text style={styles.menuOptionText}>Terms of Service</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuOption}
+                                      onPress={()=>{
+                                          this.logOut();
+                                      }}>
+                        <Text style={styles.menuOptionText}>Log Out</Text>
                     </TouchableOpacity>
 
                 </View>
@@ -86,17 +88,22 @@ export class Settings extends Component {
 const styles = StyleSheet.create({
     menuOption : {
         borderBottomWidth : 1,
-        borderBottomColor : Colors.lightBlue,
-        padding: 12,
-        marginBottom: 5,
+        borderBottomColor : 'rgba(255,255,255,.2)',
+        paddingTop: 20,
+        paddingBottom : 20,
+        paddingLeft: 5,
+        paddingRight: 5,
+        marginBottom: 0,
+        marginTop: 0,
         fontWeight:'bold',
         flex :  1,
         flexDirection : 'row',
-        alignItems : 'center'
+        alignItems : 'center',
+        backgroundColor: 'rgba(255,255,255,.2)'
     },
     menuOptionText : {
         marginLeft : 8,
-        color: '#000',
+        color: '#fff',
         fontWeight:'bold'
     }
 });

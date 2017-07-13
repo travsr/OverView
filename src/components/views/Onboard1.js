@@ -37,8 +37,6 @@ export class Onboard1 extends Component {
 
         this.props.navigation.navigate("Onboard2");
 
-
-
     }
     render() {
 
@@ -48,7 +46,6 @@ export class Onboard1 extends Component {
 
                 <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: 0}}>
                     <Image source={require('../../images/screenshots/screen1.png')} style={{width: 180, height: 250}}/>
-
 
                     <Text style={{
                         color: '#fff',
@@ -85,9 +82,6 @@ export class Onboard1 extends Component {
                                       fontStyle: 'italic',
                                   }}/>
                 </View>
-
-
-
 
             </View>
         );

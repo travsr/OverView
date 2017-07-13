@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    Alert,
     Image,
     TextInput,
     Text,
@@ -8,12 +9,14 @@ import {
     StyleSheet,
     StatusBar,
     Linking,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 
 import {StyledButton} from '../presentation/StyledButton';
 import { NavigationActions } from 'react-navigation';
 import {Colors} from '../../data/Styles';
+import { DataManager } from '../../data/DataManager';
 
 
 let Parse = require('parse/react-native');
@@ -25,7 +28,8 @@ export class Onboard3 extends Component {
         this.state = {
             username : "",
             password : "",
-            screen : 0
+            screen : 0,
+            loading : false
         };
 
     }
@@ -33,13 +37,22 @@ export class Onboard3 extends Component {
         title: 'Login' ,
         headerVisible : false
     };
+
+    dataManager = new DataManager();
+
     login() {
+
+        this.setState({loading:true});
 
         console.log("Logging in...");
         Parse.User.logIn(this.state.username, this.state.password).then((user)=> {
 
             console.log("logged in");
             console.log(user.get("username"));
+
+            this.dataManager.getServerDataModel();
+
+
 
             // Reset the navigation stack so we can't go back to login
             const resetAction = NavigationActions.reset({
@@ -48,12 +61,33 @@ export class Onboard3 extends Component {
             });
             this.props.navigation.dispatch(resetAction);
 
+            this.setState({loading:false});
+
+
+
+
+
+
         }, (error) => {
-            console.log(error);
+
+            // Works on both iOS and Android
+            Alert.alert(
+                'Login Error',
+                error.message,
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            );
+
+            this.setState({loading:false});
+
         });
 
     }
     signUp() {
+
+        this.setState({loading:true});
 
 
         let user = new Parse.User();
@@ -65,6 +99,8 @@ export class Onboard3 extends Component {
             console.log("logged in");
             console.log(user.get("username"));
 
+            this.dataManager.getServerDataModel();
+
             // Reset the navigation stack so we can't go back to login
             const resetAction = NavigationActions.reset({
                 index: 0,
@@ -72,8 +108,23 @@ export class Onboard3 extends Component {
             });
             this.props.navigation.dispatch(resetAction);
 
+            this.setState({loading:false});
+
         }, (error) => {
-            console.log(error);
+
+
+            // Works on both iOS and Android
+            Alert.alert(
+                'Sign Up Error',
+                error.message,
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            );
+
+            this.setState({loading:false});
+
         });
     }
     continue() {
@@ -88,11 +139,28 @@ export class Onboard3 extends Component {
 
         return (
             <View style={{width:'100%',height:'100%',justifyContent : 'center'}}>
-                <Image source={require('../../images/maps/12-lijiang.jpg') }  resizeMode="cover" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
+                <Image source={require('../../images/maps/12-lijiang.jpg') }
+                       resizeMode="cover"
+                       style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
-                <View style={{position:'absolute',bottom:20,left:20,right:20,flexDirection:'row',flexWrap:'wrap',alignItems: 'center', justifyContent : 'center', marginTop : 20}}>
-                    <Text style={{color : '#fff',backgroundColor:'transparent' }}>By signing up you agree to our</Text>
+                <View style={{
+                            position:'absolute',
+                            bottom:20,
+                            left:20,
+                            right:20,
+                            flexDirection:'row',
+                            flexWrap:'wrap',
+                            alignItems: 'center',
+                            justifyContent : 'center',
+                            marginTop : 20
+                    }}>
+                    <Text style={{
+                            color : '#fff',
+                            backgroundColor:'transparent'
+                        }}>
+                        By signing up you agree to our
+                    </Text>
                     <TouchableOpacity onPress={()=>{
                                 Linking.openURL("https://overlog.herokuapp.com/tos.html");
                             }}>
@@ -112,7 +180,6 @@ export class Onboard3 extends Component {
 
 
                 <View style={{flexDirection : 'column', paddingLeft : 40, paddingRight : 40 }}>
-
 
                     <TextInput
                         style={styles.myInput}
@@ -140,7 +207,12 @@ export class Onboard3 extends Component {
                                           borderTopLeftRadius : 20,
                                           borderBottomLeftRadius : 20
                                       }}
-                                      textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic' }}/>
+                                      textStyle={{
+                                          fontSize:16,
+                                          fontWeight: 'bold',
+                                          color:'#fff',
+                                          fontStyle:'italic'
+                                      }}/>
                         <StyledButton title="Log In" onPress={()=>{this.login()}}
                                       enabled={true}
                                       style={{
@@ -150,14 +222,25 @@ export class Onboard3 extends Component {
                                           borderTopRightRadius : 20,
                                           borderBottomRightRadius : 20
                                       }}
-                                      textStyle={{fontSize:16, fontWeight: 'bold',color:'#fff', fontStyle:'italic'}}/>
+                                      textStyle={{
+                                          fontSize:16,
+                                          fontWeight: 'bold',
+                                          color:'#fff',
+                                          fontStyle:'italic'
+                                      }}/>
                     </View>
 
                 </View>
 
 
-
-
+                { this.state.loading &&
+                    <ActivityIndicator size={50} style={{
+                        position: 'absolute',
+                        bottom: 100,
+                        left: '50%',
+                        marginLeft: -25
+                    }} />
+                }
 
             </View>
         );
