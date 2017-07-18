@@ -111,6 +111,22 @@ export class History extends Component {
                     onPress={this.showSessionModal}
                 />
 
+                <StyledButton
+                    style={{
+                        position:'absolute',
+                        left:10,bottom:10,
+                        width : 120,
+                        height: 30,
+                        backgroundColor : Colors.lightBlue,
+                        borderRadius : 30}}
+                    textStyle={{color : '#fff'}}
+                    title={"Support the Devs"}
+                    enabled={true}
+                    onPress={()=>{
+                        this.props.navigation.navigate("SupportDeveloper");
+                    }}
+                />
+
                 <Modal
                     visible={this.state.sessionModalVisible}
                     onRequestClose={()=>{this.setState({sessionModalVisible : false})}}

@@ -202,6 +202,8 @@ export class Entry extends Component {
                         result={this.state.selectedResult}
                     />
 
+
+
                     <View style={{margin:0, flexDirection : 'row', flexWrap: 'wrap',backgroundColor: 'rgba(97, 91, 181, .3 )', paddingBottom : 100 }}>
 
                         {/* match notes */}
@@ -216,7 +218,26 @@ export class Entry extends Component {
                             />
                         </View>
 
-                        <View elevation={10} style={{width: '100%',padding : 10, flexDirection : 'row', justifyContent : 'center', paddingTop : 20}}>
+                        <View style={{width: '100%',flexDirection: 'row', justifyContent: 'center',paddingTop:20}}>
+
+                            {/* my performance */}
+                            <View style={{width:'50%',margin: 0,  padding: 4,backgroundColor : 'rgba(0, 0, 0, .01)', borderColor : 'rgba(97, 91, 181, 0)', borderTopWidth: 1, borderBottomWidth:1, borderRightWidth:1}}>
+                                <PerformanceSlider
+                                    value={this.state.myPerf}
+                                    onChange={this.onMyPerfChange}
+                                    text="My Gameplay"/>
+                            </View>
+
+                            {/* team performance */}
+                            <View style={{width:'50%', margin : 0, padding: 4, backgroundColor : 'rgba(0,0,0,.01)', borderColor : 'rgba(97, 91, 181, 0)', borderTopWidth: 1, borderBottomWidth:1,}}>
+                                <PerformanceSlider
+                                    value={this.state.teamPerf}
+                                    onChange={this.onTeamPerfChange}
+                                    text="Team's Gameplay"/>
+                            </View>
+                        </View>
+
+                        <View elevation={10} style={{width: '100%',padding : 10, flexDirection : 'row', justifyContent : 'center', paddingTop : 10}}>
 
                             {/* thrower switch */}
                             <View style={{width : '33%', justifyContent : 'center', flexDirection: 'row',flexWrap:'wrap' }}>
@@ -251,21 +272,7 @@ export class Entry extends Component {
 
                         </View>
 
-                        {/* my performance */}
-                        <View style={{width:'50%',margin: 0,  padding: 4,backgroundColor : 'rgba(0, 0, 0, .01)', borderColor : 'rgba(97, 91, 181, 0)', borderTopWidth: 1, borderBottomWidth:1, borderRightWidth:1}}>
-                            <PerformanceSlider
-                                value={this.state.myPerf}
-                                onChange={this.onMyPerfChange}
-                                text="My Gameplay"/>
-                        </View>
 
-                        {/* team performance */}
-                        <View style={{width:'50%', margin : 0, padding: 4, backgroundColor : 'rgba(0,0,0,.01)', borderColor : 'rgba(97, 91, 181, 0)', borderTopWidth: 1, borderBottomWidth:1,}}>
-                            <PerformanceSlider
-                                value={this.state.teamPerf}
-                                onChange={this.onTeamPerfChange}
-                                text="Team's Gameplay"/>
-                        </View>
 
                     </View>
 

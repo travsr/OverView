@@ -86,11 +86,6 @@ export class Onboard0 extends Component {
                                       }}/>
                     </View>
                 </View>
-
-
-
-
-
             </View>
         );
     }

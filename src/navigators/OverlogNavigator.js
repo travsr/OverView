@@ -30,6 +30,10 @@ import { Onboard1 } from '../components/views/Onboard1';
 import { Onboard2 } from '../components/views/Onboard2';
 
 import { Onboard3 } from '../components/views/Onboard3';
+import { OnboardSignUp  } from '../components/views/OnboardSignUp';
+import { OnboardForgot  } from '../components/views/OnboardForgot';
+
+import { SupportDeveloper } from '../components/views/SupportDeveloper';
 
 // Init parse
 let Parse = require('parse/react-native');
@@ -95,7 +99,10 @@ Parse.User.currentAsync().then((user) => {
 export const OverlogNavigator = StackNavigator({
     Startup : {screen : Startup},
     Onboard :  {screen : OnboardTabs  },
-    MainTabs : {screen : MainTabs }
+    OnboardSignUp :  {screen : OnboardSignUp  },
+    OnboardForgot :  {screen : OnboardForgot  },
+    MainTabs : {screen : MainTabs },
+    SupportDeveloper : {screen : SupportDeveloper}
 },{
     initialRouteName : "Startup",
     headerMode : "none"

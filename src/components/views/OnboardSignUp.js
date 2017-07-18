@@ -21,13 +21,14 @@ import { DataManager } from '../../data/DataManager';
 
 let Parse = require('parse/react-native');
 
-export class Onboard3 extends Component {
+export class OnboardSignUp extends Component {
     constructor(props) {
         super(props) ;
 
         this.state = {
             username : "",
             password : "",
+            email : "",
             screen : 0,
             loading : false
         };
@@ -40,61 +41,21 @@ export class Onboard3 extends Component {
 
     dataManager = new DataManager();
 
-    login() {
-
-        this.setState({loading:true});
-
-        console.log("Logging in...");
-        Parse.User.logIn(this.state.username, this.state.password).then((user)=> {
-
-            console.log("logged in");
-            console.log(user.get("username"));
-
-            this.dataManager.getServerDataModel();
-
-
-
-            // Reset the navigation stack so we can't go back to login
-            const resetAction = NavigationActions.reset({
-                index: 0,
-                actions: [NavigationActions.navigate({ routeName: 'MainTabs'})]
-            });
-            this.props.navigation.dispatch(resetAction);
-
-            this.setState({loading:false});
-
-
-
-
-
-
-        }, (error) => {
-
-            // Works on both iOS and Android
-            Alert.alert(
-                'Login Error',
-                error.message,
-                [
-                    {text: 'OK', onPress: () => console.log('OK Pressed')},
-                ],
-                { cancelable: false }
-            );
-
-            this.setState({loading:false});
-
-        });
-
-    }
     signUp() {
 
         this.setState({loading:true});
 
-
         let user = new Parse.User();
         user.set("username", this.state.username);
         user.set("password", this.state.password);
+        user.set("email", this.state.email);
 
-        user.signUp({username : this.state.username, password: this.state.password}).then((user)=> {
+        user.signUp({
+                username : this.state.username,
+                email : this.state.email,
+                password: this.state.password
+
+        }).then((user)=> {
 
             console.log("logged in");
             console.log(user.get("username"));
@@ -144,6 +105,16 @@ export class Onboard3 extends Component {
                        resizeMode="cover"
                        style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}/>
 
+                {/* Back button */}
+                <TouchableOpacity
+                    style={{position: 'absolute',top: 10,left:10}}
+                    onPress={()=>{
+                        const backAction = NavigationActions.back();
+                        this.props.navigation.dispatch(backAction);
+                    }}>
+                    <Image resizeMode="contain" style={{width: 40, height : 40, opacity: .8}} source={require("../../images/icons/back.png")}/>
+                </TouchableOpacity>
+
                 <View style={{
                             position:'absolute',
                             bottom:20,
@@ -189,6 +160,13 @@ export class Onboard3 extends Component {
                         onChangeText={(text) => {this.setState({username:text})} }
                     />
                     <TextInput
+                        style={styles.myInput}
+                        placeholder="Email"
+                        underlineColorAndroid="transparent"
+                        placeholderTextColor="rgba(255,255,255,.7)"
+                        onChangeText={(text) => {this.setState({email:text})} }
+                    />
+                    <TextInput
                         style={styles.myInput }
                         underlineColorAndroid="transparent"
                         placeholder="Password"
@@ -198,17 +176,13 @@ export class Onboard3 extends Component {
                     />
                     <View style={{flexDirection : 'row'}}>
 
-                        <StyledButton title="Sign Up" onPress={()=>{
-
-                                            this.props.navigation.navigate("OnboardSignUp");
-                                      }}
+                        <StyledButton title="Sign Up" onPress={()=>{this.signUp()}}
                                       enabled={true}
                                       style={{
-                                          width: '50%',
+                                          width: '100%',
                                           height : 40,
                                           backgroundColor: '#00a5e2',
-                                          borderTopLeftRadius : 20,
-                                          borderBottomLeftRadius : 20
+                                          borderRadius : 20,
                                       }}
                                       textStyle={{
                                           fontSize:16,
@@ -216,28 +190,8 @@ export class Onboard3 extends Component {
                                           color:'#fff',
                                           fontStyle:'italic'
                                       }}/>
-                        <StyledButton title="Log In" onPress={()=>{this.login()}}
-                                      enabled={true}
-                                      style={{
-                                          width: '50%',
-                                          height : 40,
-                                          backgroundColor: '#ff9c00' ,
-                                          borderTopRightRadius : 20,
-                                          borderBottomRightRadius : 20
-                                      }}
-                                      textStyle={{
-                                          fontSize:16,
-                                          fontWeight: 'bold',
-                                          color:'#fff',
-                                          fontStyle:'italic'
-                                      }}/>
-                    </View>
 
-                    <TouchableOpacity onPress={()=> {
-                        this.props.navigation.navigate("OnboardForgot");
-                    }}>
-                        <Text style={{color : '#FFF', marginTop: 14,fontSize : 8, opacity: .5}}>Forgot Password?</Text>
-                    </TouchableOpacity>
+                    </View>
 
                 </View>
 
