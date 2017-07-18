@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
+    Alert,
     ActivityIndicator,
     StyleSheet,
     Text,
@@ -99,6 +100,19 @@ export class Entry extends Component {
         });
     }
     addEntry() {
+
+        if(!this.state.selectedMapObject) {
+            // Works on both iOS and Android
+            Alert.alert(
+                'Error',
+                'Please select the map you played on',
+                [
+                    {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                { cancelable: false }
+            );
+            return;
+        }
 
         // Save log entry with parse
         let LogEntry = Parse.Object.extend("LogEntry");
