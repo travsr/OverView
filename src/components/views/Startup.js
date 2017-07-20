@@ -55,7 +55,7 @@ export class Startup extends Component {
 
         return (
             <View>
-                <StatusBar backgroundColor="#34315a"  />
+                <StatusBar hidden={true} />
             </View>
         );
     }

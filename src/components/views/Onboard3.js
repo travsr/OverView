@@ -236,14 +236,14 @@ export class Onboard3 extends Component {
                     <TouchableOpacity onPress={()=> {
                         this.props.navigation.navigate("OnboardForgot");
                     }}>
-                        <Text style={{color : '#FFF', marginTop: 14,fontSize : 8, opacity: .5}}>Forgot Password?</Text>
+                        <Text style={{color : '#FFF', marginTop: 14,fontSize : 10, opacity: .5, backgroundColor : 'transparent'}}>Forgot Password?</Text>
                     </TouchableOpacity>
 
                 </View>
 
 
                 { this.state.loading &&
-                    <ActivityIndicator size={50} style={{
+                    <ActivityIndicator style={{
                         position: 'absolute',
                         bottom: 100,
                         left: '50%',

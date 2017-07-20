@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         marginBottom: 0,
         marginTop: 0,
-        fontWeight:'bold',
         flex :  1,
         flexDirection : 'row',
         alignItems : 'center',

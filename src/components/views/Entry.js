@@ -29,6 +29,7 @@ import { MapSelect } from '../container/MapSelect';
 import { MatchResultPicker } from '../presentation/MatchResultPicker';
 import { PerformanceSlider } from '../presentation/PerformanceSlider';
 import { StyledButton } from '../presentation/StyledButton';
+import { StatusBarBackground } from '../presentation/StatusBarBackground';
 import { DataManager } from '../../data/DataManager';
 
 let Parse = require('parse/react-native');
@@ -185,7 +186,7 @@ export class Entry extends Component {
         return (
             <View>
 
-                <StatusBar backgroundColor="#34315a"  />
+                <StatusBar hidden={true} />
 
                 <Image
                     source={require('../../images/app-bg2.png')}

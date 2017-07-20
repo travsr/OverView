@@ -42,6 +42,11 @@ export class History extends Component {
             this.setState(this.state);
         });
 
+        setInterval(()=>{
+           // this.setState(this.state);
+           // this.refs._scrollView.scrollTo({x:0,y:0, animated:true});
+        }, 2000);
+
         this.showSessionModal = this.showSessionModal.bind(this);
 
     }
@@ -79,6 +84,8 @@ export class History extends Component {
                 />
 
                 <ListView
+                    ref="_scrollView"
+                    style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
                     dataSource={dataSource}
                     enableEmptySections={true}
                     renderHeader={()=>
@@ -101,7 +108,7 @@ export class History extends Component {
                     style={{
                         position:'absolute',
                         right:10,bottom:10,
-                        width : 120,
+                        width : 140,
                         height: 30,
                         backgroundColor : Colors.lightBlue,
                         borderRadius : 30}}

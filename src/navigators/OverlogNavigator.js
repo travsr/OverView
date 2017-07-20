@@ -64,7 +64,8 @@ const OnboardTabs = TabNavigator({
         },
         showLabel :  false ,
         showIcon : false
-    }
+    },
+    swipeEnabled : true
 });
 
 
@@ -84,7 +85,10 @@ const MainTabs = TabNavigator({
         activeTintColor : '#ff9c00',
         showLabel :  true   ,
         showIcon : false
-    }
+    },
+    initialRouteName:"EntryNew",
+    swipeEnabled : true,
+    lazy : false
 });
 
 MainTabs.navigationOptions = {

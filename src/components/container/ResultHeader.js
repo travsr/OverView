@@ -96,6 +96,7 @@ export class ResultHeader extends Component {
                         {
                             Object.keys(characterResults).map((characterName, index) =>
                                 <CharacterPortrait
+                                    key={index}
                                     width={30}
                                     height={30}
                                     selected={true}
@@ -111,6 +112,7 @@ export class ResultHeader extends Component {
                                     let myMap = this.getMapFromName(mapName);
                                     if(myMap) {
                                         return (<MapThumbnail
+                                            key={index}
                                             width={50}
                                             height={40}
                                             selected={true}
