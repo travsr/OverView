@@ -67,7 +67,7 @@ export class Onboard0 extends Component {
                             fontSize: 30,
                             fontWeight: 'bold',
                             backgroundColor : 'transparent'
-                        }}>LOG</Text>
+                        }}>VIEW</Text>
                     </View>
                     <View style={{flexDirection: 'row', marginTop: 20}}>
                         <StyledButton title="Get Started" onPress={()=> {this.continue()}}

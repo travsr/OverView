@@ -9,4 +9,4 @@ import { AppRegistry } from 'react-native';
 import { OverlogNavigator } from './src/navigators/OverlogNavigator';
 
 
-AppRegistry.registerComponent('OverLog', () => OverlogNavigator);
+AppRegistry.registerComponent('OverView', () => OverlogNavigator);
