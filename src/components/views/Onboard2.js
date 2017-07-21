@@ -71,11 +71,11 @@ export class Onboard2 extends Component {
                     this.state.screen == 2 &&
                     <View style={{position:'absolute',bottom:20,left:20,right:20,flexDirection:'row',flexWrap:'wrap',alignItems: 'center', justifyContent : 'center', marginTop : 20}}>
                         <Text style={{color : '#fff' }}>By clicking "Get Started" you agree to our</Text>
-                        <TouchableOpacity onPress={()=>{Linking.openURL("https://overlog.herokuapp.com/tos.html")}}>
+                        <TouchableOpacity onPress={()=>{Linking.openURL("https://overviewapp.herokuapp.com/tos.html")}}>
                             <Text style={{ color : Colors.orange }}> Terms of Service</Text>
                         </TouchableOpacity>
                         <Text style={{color : '#fff' }}> and </Text>
-                        <TouchableOpacity onPress={()=>{Linking.openURL("https://overlog.herokuapp.com/privacy.html")}}>
+                        <TouchableOpacity onPress={()=>{Linking.openURL("https://overviewapp.herokuapp.com/privacy.html")}}>
                             <Text style={{color : Colors.orange }}>Privacy Policy</Text>
                         </TouchableOpacity>
                     </View>

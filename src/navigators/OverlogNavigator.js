@@ -37,8 +37,8 @@ import { SupportDeveloper } from '../components/views/SupportDeveloper';
 
 // Init parse
 let Parse = require('parse/react-native');
-Parse.initialize("OverLog");
-Parse.serverURL = 'https://overlog.herokuapp.com/parse';
+Parse.initialize("OverView");
+Parse.serverURL = 'https://overviewapp.herokuapp.com/parse';
 
 let dataManager = new DataManager();
 

@@ -66,13 +66,13 @@ export class Settings extends Component {
 
                     <TouchableOpacity style={styles.menuOption}
                                       onPress={()=>{
-                                          Linking.openURL("https://overlog.herokuapp.com/privacy.html");
+                                          Linking.openURL("https://overviewapp.herokuapp.com/privacy.html");
                                       }}>
                         <Text style={styles.menuOptionText}>Privacy Policy</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.menuOption}
                                       onPress={()=>{
-                                          Linking.openURL("https://overlog.herokuapp.com/tos.html");
+                                          Linking.openURL("https://overviewapp.herokuapp.com/tos.html");
                                       }}>
                         <Text style={styles.menuOptionText}>Terms of Service</Text>
                     </TouchableOpacity>

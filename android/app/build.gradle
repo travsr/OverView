@@ -58,7 +58,7 @@ import com.android.build.OutputFile
  *   inputExcludes: ["android/**", "ios/**"],
  *
  *   // override which node gets called and with what additional arguments
- *   nodeExecutableAndArgs: ["node"]
+ *   nodeExecutableAndArgs: ["node"],
  *
  *   // supply additional arguments to the packager
  *   extraPackagerArgs: []
@@ -87,11 +87,11 @@ android {
     buildToolsVersion '25.0.0'
 
     defaultConfig {
-        applicationId "com.overlog"
+        applicationId "com.overview"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

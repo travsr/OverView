@@ -162,13 +162,13 @@ export class Onboard3 extends Component {
                         By signing up you agree to our
                     </Text>
                     <TouchableOpacity onPress={()=>{
-                                Linking.openURL("https://overlog.herokuapp.com/tos.html");
+                                Linking.openURL("https://overviewapp.herokuapp.com/tos.html");
                             }}>
                         <Text style={{ color : Colors.orange,backgroundColor:'transparent' }}> Terms of Service</Text>
                     </TouchableOpacity>
                     <Text style={{color : '#fff',backgroundColor:'transparent' }}> and </Text>
                     <TouchableOpacity onPress={()=>{
-                                Linking.openURL("https://overlog.herokuapp.com/privacy.html");
+                                Linking.openURL("https://overviewapp.herokuapp.com/privacy.html");
                             }}>
                         <Text style={{color : Colors.orange,backgroundColor:'transparent' }}>Privacy Policy</Text>
                     </TouchableOpacity>
