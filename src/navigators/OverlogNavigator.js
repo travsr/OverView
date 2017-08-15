@@ -50,8 +50,6 @@ if(Platform.OS === 'ios') {
 }
 
 
-
-
 // Onboard Tabs
 const OnboardTabs = TabNavigator({
     Onboard0: { screen : Onboard0  },
@@ -63,7 +61,7 @@ const OnboardTabs = TabNavigator({
         style :  {
             display :'none',
         },
-        showLabel :  false ,
+        showLabel :  false,
         showIcon : false
     },
     swipeEnabled : true
@@ -78,15 +76,25 @@ const MainTabs = TabNavigator({
 }, {
     tabBarOptions : {
         style : {
-            backgroundColor : '#000',
+            backgroundColor : '#47437f',
+            borderBottomWidth: 1,
+            borderBottomColor: '#000',
         },
         indicatorStyle : {
-            backgroundColor : '#ff9c00'
+            backgroundColor : '#ff9c00',
+            height: 5,
+            borderRadius : 5,
+            marginBottom: 2
         },
+        labelStyle : {
+            fontWeight:'bold'
+        },
+        upperCaseLabel : false,
         activeTintColor : '#ff9c00',
         showLabel :  true   ,
         showIcon : false
     },
+    tabBarPosition : 'bottom',
     initialRouteName:"EntryNew",
     swipeEnabled : true,
     lazy : false

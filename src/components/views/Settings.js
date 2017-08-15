@@ -57,6 +57,12 @@ export class Settings extends Component {
             />
             <ScrollView style={{ flex : 1}}>
                 <View style={{marginLeft: 14, marginRight : 14, marginTop: 20, marginBottom : 0}}>
+                    {/*<TouchableOpacity style={styles.menuOption}*/}
+                                      {/*onPress={()=>{*/}
+                                          {/*this.props.navigation.navigate("Feedback");*/}
+                                      {/*}}>*/}
+                        {/*<Text style={styles.menuOptionText}>Leave Feedback</Text>*/}
+                    {/*</TouchableOpacity>*/}
                     <TouchableOpacity style={styles.menuOption}
                                       onPress={()=>{
                                           this.props.navigation.navigate("SupportDeveloper");

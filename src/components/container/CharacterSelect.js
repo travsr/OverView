@@ -60,30 +60,30 @@ export class CharacterSelect extends Component {
 
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "all" ? {backgroundColor:Colors.purple} : {} ]}
-                        onPress={()=>{this.setState({type : "all"})}}>
+                        onPress={()=>{this.setState({type : "all"});  this.refs._scrollView.scrollTo(0,0);  }}>
                         <Text style={{color:'white', fontSize : 9}}>ALL</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "offense" ? {backgroundColor:Colors.purple} : {} ]}
-                        onPress={()=>{this.setState({type : "offense"})}}>
+                        onPress={()=>{this.setState({type : "offense"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Image style={styles.filterOptionImg} source={require('../../images/icons/char-offense.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "defense" ? {backgroundColor:Colors.purple} : {} ]}
-                        onPress={()=>{this.setState({type : "defense"})}}>
+                        onPress={()=>{this.setState({type : "defense"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Image style={styles.filterOptionImg} source={require('../../images/icons/char-defense.png')} />
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "tank" ? {backgroundColor:Colors.purple} : {} ]}
-                        onPress={()=>{this.setState({type : "tank"})}}>
+                        onPress={()=>{this.setState({type : "tank"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Image style={styles.filterOptionImg} source={require('../../images/icons/char-tank.png')} />
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "support" ? {backgroundColor:Colors.purple} : {} ]}
-                        onPress={()=>{this.setState({type : "support"})}}>
+                        onPress={()=>{this.setState({type : "support"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Image style={styles.filterOptionImg} source={require('../../images/icons/char-support.png')} />
                     </TouchableOpacity>
 
@@ -92,7 +92,7 @@ export class CharacterSelect extends Component {
 
 
                 </View>
-                <ScrollView horizontal={true} pagingEnabled={false} style={{width:'100%',height:180}}>
+                <ScrollView ref="_scrollView" horizontal={true} pagingEnabled={false} style={{width:'100%',height:180}}>
                     <View style={{ flexWrap:'wrap',flexDirection:'column',height:180  }}>
                     {this.props.characterList.map((character, index) => {
 
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     filterOption : {
         flex: 1,
         height :24,
-        backgroundColor: 'rgba(25,25,25,.4  )',
+        backgroundColor: 'rgba(25,25,25,.5 )',
         alignItems: 'center',
         justifyContent : 'center',
         borderRightWidth:1,

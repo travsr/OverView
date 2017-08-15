@@ -36,11 +36,12 @@ export class SupportDeveloper extends Component {
                 </TouchableOpacity>
 
                 <View style={{flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginBottom: 0}}>
-                    <Image source={require('../../images/screenshots/brewfund.png')} style={{width: 180, height: 250}}/>
+                    <Image
+                        source={require('../../images/screenshots/brewfund.png')}
+                        style={{width: 180, height: 250}} />
 
 
-                    <Text style={{
-                        color: '#fff',
+                    <Text style={{color: '#fff',
                         fontSize: 22,
                         fontWeight : 'bold',
                         marginTop: 18,

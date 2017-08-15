@@ -49,8 +49,8 @@ export class DataManager{
         console.log("Getting server model...");
         return this.getCurrentUser()
             .then(() => this.getLogSessions())
-            .then(() => this.selectSession(0))
             .then(() => Promise.all([
+                this.selectSession(0),
                 this.getCharacters(),
                 this.getMaps(),
             ]))
@@ -189,32 +189,68 @@ export class DataManager{
         // select session
         this.serverDataModel.selectedSession = this.serverDataModel.logSessions[index];
 
-        // get log entries for this session
-        return this.getCurrentUser().then(()=>{
-            return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
-                // Make a query to get the user's history
-                let q = new Parse.Query(Parse.Object.extend('LogEntry'));
-                q.equalTo('user', this.serverDataModel.currentUser);
-                q.equalTo('logSession', this.serverDataModel.selectedSession);
-                q.include('map');
-                q.include('characters');
-                q.include('logSession');
-                q.descending('createdAt');
-                q.limit(1000);
-                q.find().then((entries) => {
-                    this.serverDataModel.selectedLogEntries = entries;
-
-                    resolve(entries);
-                    this.dispatchOnDataChangeEvent();
-                }, (err) => {
-                    reject(err);
-                });
+            // Make a query to get the user's history
+            let q = new Parse.Query(Parse.Object.extend('LogEntry'));
+            q.equalTo('user', this.serverDataModel.currentUser);
+            q.equalTo('logSession', this.serverDataModel.selectedSession);
+            q.include('map');
+            q.include('characters');
+            q.include('logSession');
+            q.descending('createdAt');
+            q.limit(1000);
+            q.find().then((entries) => {
+                this.serverDataModel.selectedLogEntries = entries;
+                resolve(entries);
+                this.dispatchOnDataChangeEvent();
+            }, (err) => {
+                reject(err);
             });
-        }, (err)=> {
-            return new Promise((resolve,reject)=>{reject('could not get entries while not logged in')});
         });
 
+
     }
+
+    // selectSession(index) {
+    //
+    //     return new Promise((resolve, reject) => {
+    //
+    //
+    //         // select session
+    //         this.serverDataModel.selectedSession = this.serverDataModel.logSessions[index];
+    //
+    //
+    //
+    //         this.serverDataModel.selectedSession.fetch().then(()=> {
+    //
+    //             // Make a query to get the user's history
+    //             let q = new Parse.Query(Parse.Object.extend('LogEntry'));
+    //             q.equalTo('user', this.serverDataModel.currentUser);
+    //             q.equalTo('logSession', this.serverDataModel.selectedSession);
+    //             q.include('map');
+    //             q.include('characters');
+    //             q.include('logSession');
+    //             q.descending('createdAt');
+    //             q.limit(1000);
+    //             return q.find();
+    //         }).then((entries) => {
+    //
+    //             this.serverDataModel.selectedLogEntries = entries;
+    //             this.dispatchOnDataChangeEvent();
+    //             resolve();
+    //         }, (err) => {
+    //
+    //             reject(err);
+    //         })
+    //
+    //
+    //     });
+    //
+    //
+    //
+    //
+    //
+    // }
 
 }

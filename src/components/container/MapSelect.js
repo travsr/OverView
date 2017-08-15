@@ -47,32 +47,32 @@ export class MapSelect extends Component {
 
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "all" ? {backgroundColor : Colors.purple} : {}]}
-                        onPress={()=>{this.setState({type : "all"})}}>
+                        onPress={()=>{this.setState({type : "all"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Text style={styles.filterOptionText}>ALL</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "assault" ? {backgroundColor : Colors.purple} : {}]}
-                        onPress={()=>{this.setState({type : "assault"})}}>
+                        onPress={()=>{this.setState({type : "assault"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Text style={styles.filterOptionText}>Assault</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "koth" ? {backgroundColor : Colors.purple} : {}]}
-                        onPress={()=>{this.setState({type : "koth"})}}>
+                        onPress={()=>{this.setState({type : "koth"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Text style={styles.filterOptionText}>Control</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "hybrid" ? {backgroundColor : Colors.purple} : {}]}
-                        onPress={()=>{this.setState({type : "hybrid"})}}>
+                        onPress={()=>{this.setState({type : "hybrid"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Text style={styles.filterOptionText}>Hybrid</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={[styles.filterOption, this.state.type == "payload" ? {backgroundColor : Colors.purple} : {}]}
-                        onPress={()=>{this.setState({type : "payload"})}}>
+                        onPress={()=>{this.setState({type : "payload"});  this.refs._scrollView.scrollTo(0,0); }}>
                         <Text style={styles.filterOptionText}>Payload</Text>
                     </TouchableOpacity>
 
                 </View>
-                <ScrollView horizontal={true} pagingEnabled={false} style={{height: 100, width: '100%'}}>
+                <ScrollView ref="_scrollView" horizontal={true} pagingEnabled={false} style={{height: 100, width: '100%'}}>
                     <View style={{flexWrap: 'wrap', flexDirection: 'column', height: 100}}>
                         {this.props.mapList.map((mapObject, index) => {
 
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     filterOption : {
         flex: 1,
         height : 30,
-        backgroundColor: 'rgba(25,25,25,.4 )',
+        backgroundColor: 'rgba(25,25,25,.5 )',
         alignItems: 'center',
         justifyContent : 'center',
         borderRightWidth:1,
