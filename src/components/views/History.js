@@ -99,7 +99,7 @@ export class History extends Component {
 
         const expandH = this.expandHeight.interpolate({
             inputRange : [0, 1],
-            outputRange : [0, 200]
+            outputRange : [60, 200]
         });
 
         let session = this.dataManager.serverDataModel.selectedSession;
@@ -124,27 +124,27 @@ export class History extends Component {
                     style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
                 />
 
-                {/*<TouchableOpacity onPress={this.expandView}>*/}
-                    {/*<Animated.View style={{*/}
-                        {/*backgroundColor:'#222',*/}
-                        {/*height : expandH,*/}
-                        {/*width : '100%',*/}
-                        {/*flexDirection : 'row'*/}
-                    {/*}}>*/}
-                        {/*<View style={styles.filter}>*/}
-                            {/*<Image style={{height : 20, width: 20}} resizeMode="contain" source={require('../../images/icons/graph.png')} />*/}
-                        {/*</View>*/}
-                        {/*<View style={styles.filter}>*/}
-                            {/*<Image style={{height : 20, width: 20}} resizeMode="contain" source={require('../../images/icons/list.png')} />*/}
-                        {/*</View>*/}
+                <TouchableOpacity onPress={this.expandView}>
+                    <Animated.View style={{
+                        backgroundColor:'#222',
+                        height : expandH,
+                        width : '100%',
+                        flexDirection : 'row'
+                    }}>
+                        <View style={styles.filter}>
+                            <Image style={{height : 20, width: 20}} resizeMode="contain" source={require('../../images/icons/graph.png')} />
+                        </View>
+                        <View style={styles.filter}>
+                            <Image style={{height : 20, width: 20}} resizeMode="contain" source={require('../../images/icons/list.png')} />
+                        </View>
 
-                        {/*<View style={{flexDirection:'column'}}>*/}
-                            {/*<Text style={styles.recordText}>{recordText}</Text>*/}
-                            {/*<SessionVis summary={summary}*/}
-                                        {/*style={{width:'100%', height: 20, marginTop: 10 }}/>*/}
-                        {/*</View>*/}
-                    {/*</Animated.View>*/}
-                {/*</TouchableOpacity>*/}
+                        <View style={{flexDirection:'column'}}>
+                            <Text style={styles.recordText}>{recordText}</Text>
+                            <SessionVis summary={summary}
+                                        style={{width:'100%', height: 20, marginTop: 10 }}/>
+                        </View>
+                    </Animated.View>
+                </TouchableOpacity>
 
                 <Animated.View style={{position:'absolute',top:expandH,left:0, right:0,bottom :0}}>
 

@@ -196,8 +196,9 @@ export class OnboardSignUp extends Component {
                 </View>
 
 
+
                 { this.state.loading &&
-                    <ActivityIndicator size={50} style={{
+                    <ActivityIndicator style={{
                         position: 'absolute',
                         bottom: 100,
                         left: '50%',

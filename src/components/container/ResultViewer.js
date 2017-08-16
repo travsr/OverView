@@ -143,7 +143,7 @@ export class ResultViewer extends Component {
 
         const expandH = this.expandHeight.interpolate({
             inputRange : [0, 1],
-            outputRange : [200, 400]
+            outputRange : [200, 250]
         });
 
 
