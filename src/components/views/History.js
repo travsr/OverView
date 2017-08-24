@@ -10,8 +10,11 @@ import {
     Modal,
     StyleSheet,
     Animated,
-    Easing
+    Easing,
+    Picker
 } from 'react-native';
+
+import Drawer from 'react-native-drawer';
 
 import {ResultViewer} from '../container/ResultViewer';
 import {ResultHeader} from '../container/ResultHeader';
@@ -116,6 +119,19 @@ export class History extends Component {
         }
 
         return (
+            <Drawer
+                ref={(ref) => this._drawer = ref}
+                type={"displace"}
+                side={"top"}
+                panOpenMask={.25}
+                panThreshold={.10}
+                captureGestures={true}
+                openDrawerOffset={(viewport) => viewport.height - 200}
+                content={<View style={{height: 200, width:'100%', backgroundColor:'#222'}}>
+
+
+                </View> }
+            >
             <View style={{width: '100%',height : '100%'}}>
 
                 <Image
@@ -124,21 +140,33 @@ export class History extends Component {
                     style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
                 />
 
-                <TouchableOpacity onPress={this.expandView}>
+                <TouchableOpacity onPress={()=>{}}>
                     <Animated.View style={{
                         backgroundColor:'#222',
                         height : expandH,
                         width : '100%',
                         flexDirection : 'row'
                     }}>
+                        {/*<View style={styles.filter}>*/}
+                            {/*<Image style={{height : 20, width: 20, margin:10}} resizeMode="contain" source={require('../../images/icons/graph.png')} />*/}
+                        {/*</View>*/}
                         <View style={styles.filter}>
-                            <Image style={{height : 20, width: 20}} resizeMode="contain" source={require('../../images/icons/graph.png')} />
-                        </View>
-                        <View style={styles.filter}>
-                            <Image style={{height : 20, width: 20}} resizeMode="contain" source={require('../../images/icons/list.png')} />
+                            <Image style={{height : 20, width: 20, margin: 10}} resizeMode="contain" source={require('../../images/icons/list.png')} />
                         </View>
 
-                        <View style={{flexDirection:'column'}}>
+                        <Picker
+                            style={{color:'#fff', opacity:1, width : '50%'}}
+                            selectedValue={this.state.language}
+                            onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                            <Picker.Item label="This Session" value="java" />
+                            <Picker.Item label="Past Week" value="java" />
+                            <Picker.Item label="Past Month" value="java" />
+                            <Picker.Item label="Season 4" value="java" />
+                            <Picker.Item label="Custom Range (choose)" value="java" />
+                            <Picker.Item label="Other session (choose)" value="java" />
+                        </Picker>
+
+                        <View style={{flexDirection:'column', position: 'absolute', right : 10}}>
                             <Text style={styles.recordText}>{recordText}</Text>
                             <SessionVis summary={summary}
                                         style={{width:'100%', height: 20, marginTop: 10 }}/>
@@ -165,8 +193,12 @@ export class History extends Component {
                             <ResultViewer entry={entry} onDelete={this._onRefresh} />
                         }
                         renderFooter={()=>
-                            <View style={{backgroundColor : Colors.purple, height: 30}}>
-                                {/*<ActivityIndicator size="large" style={{margin:20}} />*/}
+                            <View style={{backgroundColor : Colors.purple, height: 60}}>
+                                <StyledButton
+                                    enabled={true}
+                                    title="Load Older Entries"
+                                    style={{width : 150, height: 30}}
+                                    textStyle={{color : '#fff'}}/>
                             </View>
                         }
                         refreshControl={
@@ -218,6 +250,7 @@ export class History extends Component {
                 </Modal>
 
             </View>
+            </Drawer>
         );
     }
 

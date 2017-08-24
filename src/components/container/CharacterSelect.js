@@ -31,7 +31,7 @@ export class CharacterSelect extends Component {
     }
     characterPressed(character) {
 
-        let selectedCharacters = this.props.selectedharacters;
+        let selectedCharacters = this.props.selectedCharacters;
 
         // toggle selecting a character
         if(selectedCharacters.indexOf( character ) == -1) {
