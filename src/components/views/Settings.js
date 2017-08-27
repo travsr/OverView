@@ -12,6 +12,7 @@ import { NavigationActions } from 'react-navigation';
 import { DataManager } from '../../data/DataManager';
 import { Colors } from '../../data/Styles';
 
+
 let Parse = require('parse/react-native');
 
 
