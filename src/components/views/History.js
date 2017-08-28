@@ -135,6 +135,11 @@ export class History extends Component {
             let sDate = new Date("5/31/17");
             this.dataManager.getSessionInRange(sDate, eDate);
         }
+        else if(value == "Season 6") {
+            let eDate = new Date("10/01/17");
+            let sDate = new Date("9/01/17");
+            this.dataManager.getSessionInRange(sDate, eDate);
+        }
 
     }
 
@@ -178,6 +183,7 @@ export class History extends Component {
             {key : i++, label : 'Past 7 Days'},
             {key : i++, label : 'Past 30 Days'},
             {key : i++, label : 'Season 5'},
+            {key : i++, label : 'Season 6'},
         ];
 
         return (
@@ -185,18 +191,18 @@ export class History extends Component {
                 ref={(ref) => this._drawer = ref}
                 type={"displace"}
                 side={"top"}
-                panOpenMask={.1}
+                panOpenMask={.01}
                 panThreshold={.10}
                 captureGestures={false}
                 openDrawerOffset={(viewport) => viewport.height - 200}
                 content={<View style={{height: 200, width:'100%', backgroundColor:'#222'}}/>}
             >
-            <View style={{width: '100%',height : '100%'}}>
+            <View style={{width: '100%',height : '100%', backgroundColor : 'rgb(97, 91, 181)'}}>
 
                 <Image
                     source={require('../../images/app-bg2.png')}
                     resizeMode="cover"
-                    style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}
+                    style={{position:'absolute',top:0,left:0,width:'100%',height:'100%', opacity: .4}}
                 />
 
 
@@ -206,9 +212,9 @@ export class History extends Component {
                     width : '100%',
                     flexDirection : 'row'
                 }}>
-                    <TouchableOpacity style={styles.filter} onPress={()=>{this._drawer.open();}}>
-                        <Image style={{height : 20, width: 20, margin: 10}} resizeMode="contain" source={require('../../images/icons/list.png')} />
-                    </TouchableOpacity>
+                    {/*<TouchableOpacity style={styles.filter} onPress={()=>{this._drawer.open();}}>*/}
+                        {/*<Image style={{height : 20, width: 20, margin: 10}} resizeMode="contain" source={require('../../images/icons/list.png')} />*/}
+                    {/*</TouchableOpacity>*/}
 
                     <ModalPicker
                         data={pickerData}
@@ -222,6 +228,7 @@ export class History extends Component {
                             value={this.state.pickerText} />
 
                     </ModalPicker>
+                    <Text style={{color : '#fff',marginTop: 25, marginLeft: -10, fontSize : 8}}>▼</Text>
 
 
 

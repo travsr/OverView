@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     filterOption : {
         flex: 1,
         height : 30,
-        backgroundColor: 'rgba(25,25,25,.5 )',
+        backgroundColor: 'rgba(25,25,25,.75 )',
         alignItems: 'center',
         justifyContent : 'center',
         borderRightWidth:1,

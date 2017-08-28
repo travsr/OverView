@@ -247,6 +247,7 @@ export class DataManager{
 
                 let q = new Parse.Query( Parse.Object.extend("LogEntry"));
                 q.equalTo("user", user);
+                q.descending('createdAt');
                 q.greaterThanOrEqualTo('createdAt', startDate);
                 q.lessThanOrEqualTo('updatedAt',endDate);
 

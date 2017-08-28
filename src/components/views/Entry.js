@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import {
     AppRegistry,
     Alert,
+    AsyncStorage,
     ActivityIndicator,
     StyleSheet,
     Text,
@@ -51,6 +52,7 @@ export class Entry extends Component {
         this.state = {
             thrower : false,
             leaver : false,
+            sr : null,
             selectedMapObject : null,
             selectedCharacters : [],
             selectedResult : "win",
@@ -85,11 +87,48 @@ export class Entry extends Component {
         this.addEntry =  this.addEntry.bind(this);
         this.onMyPerfChange = this.onMyPerfChange.bind(this);
         this.onTeamPerfChange = this.onTeamPerfChange.bind(this);
+        this.onSRChange = this.onSRChange.bind(this);
+
+
+        this.checkUpdateMessage();
+
     }
+
+    checkUpdateMessage() {
+
+        console.log("Getting update code");
+
+        AsyncStorage.getItem('updateMessageCode').done((value) => {
+
+
+            let updateCode = "2";
+
+            if(value != updateCode) {
+
+                Alert.alert(
+                    'Update 1.0.4',
+                    'History Screen:\n-New top bar\n-Sort Log entries by Season, Current Session, or week or month period\n-SR, leaver, and thrower info now shown on log entries\n-"Load Older Entries" button\n',
+                    [
+                        {text: 'OK', onPress: () => console.log('OK Pressed')},
+                    ],
+                    { cancelable: false }
+                );
+
+               // AsyncStorage.setItem('updateMessageCode',updateCode);
+
+            }
+
+
+        });
+
+
+    }
+
     resetState() {
         this.setState({
             thrower : false,
             leaver : false,
+            sr : null,
             selectedMapObject : null,
             selectedCharacters : [],
             selectedResult : "win",
@@ -124,6 +163,18 @@ export class Entry extends Component {
             btnSaveEnabled : false
         });
 
+
+
+        // parse sr
+        let sr = null;
+        if(this.state.sr && this.state.sr.length > 0) {
+
+            if(!isNaN( parseInt(this.state.sr) )) {
+                sr = parseInt(this.state.sr);
+            }
+        }
+
+
         logEntry.save({
             user : this.dataManager.serverDataModel.currentUser,
             matchNotes  : this.state.matchNotes,
@@ -136,6 +187,7 @@ export class Entry extends Component {
             mapName : this.state.selectedMapObject.get('name'),
             ratingMe : Math.round( this.state.myPerf/14 * 100 ),
             ratingTeam : Math.round( this.state.teamPerf/14 * 100), // normalize ratings
+            sr : sr,
             thrower : this.state.thrower,
             leaver : this.state.leaver
         }).then(() => {
@@ -181,6 +233,9 @@ export class Entry extends Component {
     }
     onTeamPerfChange(value) {
         this.setState({teamPerf : value});
+    }
+    onSRChange(value) {
+        this.setState({sr : "" + value});
     }
     render() {
         return (
@@ -278,6 +333,7 @@ export class Entry extends Component {
                             <View style={{width : '33%', justifyContent : 'center', flexDirection: 'row',flexWrap:'wrap' }}>
 
                                 <TextInput
+                                    onChangeText={this.onSRChange}
                                     keyboardType="numeric"
                                     style={{height: 50,width:'100%', color : '#fff' }}
                                     placeholder="SR Rating"

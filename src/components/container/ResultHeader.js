@@ -89,7 +89,7 @@ export class ResultHeader extends Component {
                 <View style={styles.infoView} >
                     <Text style={styles.recordText}>{recordText}</Text>
                     <TimeAgo style={{color:'#fff',marginTop:0, width: '100%', textAlign: 'center'}}
-                             time={this.props.session ? this.props.session.createdAt : new Date().getTime()} />
+                             time={this.dataManager.serverDataModel.entryStartDate} />
                     <SessionVis summary={summary}
                                 style={{width:'80%', height: 20, marginTop: 10 }}/>
                     <View style={{width: '80%', marginTop : 10, flexDirection: 'row',flexWrap:'wrap'}}>

@@ -218,13 +218,11 @@ export class ResultViewer extends Component {
                                 style={{color:'#fff'}}
                                 time={this.props.entry.get('createdAt').getTime()}
                             />
-
                             {   this.props.entry.get('matchNotes') &&
                                 <View style={{backgroundColor : 'rgba(0,0,0,.1)', padding : 10, marginTop : 10, width : '80%', borderRadius : 10}}>
                                     <Text style={{color : '#fff'}}>{this.props.entry.get('matchNotes')}</Text>
                                 </View>
                             }
-
                         </View>
 
                         {/* win/loss/draw visuals */}
@@ -232,6 +230,39 @@ export class ResultViewer extends Component {
                             {this.getIcon(result)}
                         </Text>
                         <View style={this.getResultStyle(result)} />
+
+                        {/* sr rating, throwers, etc */}
+                        <View style={{flexDirection: 'row', position:'absolute',top:10,right:38}}>
+
+
+
+                            {/* thrower */}
+                            {   this.props.entry.get('thrower') &&
+                                <View style={{backgroundColor:'rgba(0,0,0,.3)', borderRadius: 3, marginRight : 3}}>
+                                    <Text style={{color:'#fff', margin: 2, fontWeight : 'bold', color : 'yellow' }}>T</Text>
+                                </View>
+                            }
+
+
+                            {/* leaver */}
+                            {
+                                this.props.entry.get('leaver') &&
+                                <View style={{backgroundColor:'rgba(0,0,0,.3)', borderRadius: 3, marginRight : 3}}>
+                                    <Text style={{color:'#fff', margin: 2, fontWeight : 'bold', color : 'red' }}>L</Text>
+                                </View>
+                            }
+
+
+                            {/* sr */}
+                            {
+                                this.props.entry.get('sr') &&
+                                <View style={{backgroundColor:'rgba(0,0,0,.3)', borderRadius: 3}}>
+                                    <Text style={{color:'#fff', margin: 2 }}>{this.props.entry.get('sr')}</Text>
+                                </View>
+                            }
+
+                        </View>
+
 
                         {/* Map thumbnails, character thumbnails */}
                         <View style={styles.thumbView}>
