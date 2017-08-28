@@ -101,20 +101,20 @@ export class Entry extends Component {
         AsyncStorage.getItem('updateMessageCode').done((value) => {
 
 
-            let updateCode = "2";
+            let updateCode = "1";
 
             if(value != updateCode) {
 
                 Alert.alert(
-                    'Update 1.0.4',
-                    'History Screen:\n-New top bar\n-Sort Log entries by Season, Current Session, or week or month period\n-SR, leaver, and thrower info now shown on log entries\n-"Load Older Entries" button\n',
+                    'Thank you for using OverView! v1.0.4',
+                    '-New top bar\n-Sort Log entries by Season, Current Session, or week or month period\n-View old sessions by selecting the record text in the top right\n-SR, leaver, and thrower info now shown on log entries\n-"Load Older Entries" button\n-Groundwork finished for more filtering options in later releases',
                     [
                         {text: 'OK', onPress: () => console.log('OK Pressed')},
                     ],
                     { cancelable: false }
                 );
 
-               // AsyncStorage.setItem('updateMessageCode',updateCode);
+               AsyncStorage.setItem('updateMessageCode',updateCode);
 
             }
 
@@ -174,6 +174,18 @@ export class Entry extends Component {
             }
         }
 
+        // normalize ratings
+        let ratingMe = null;
+        let ratingTeam = null;
+
+        if(this.state.myPerf) {
+            ratingMe = Math.round( this.state.myPerf/14 * 100 );  // normalize 0-100
+        }
+
+        if(this.state.teamPerf) {
+            ratingTeam = Math.round( this.state.teamPerf/14 * 100 ); // normalize ratings 0-100
+        }
+
 
         logEntry.save({
             user : this.dataManager.serverDataModel.currentUser,
@@ -185,8 +197,8 @@ export class Entry extends Component {
             map : this.state.selectedMapObject,
             mapType : this.state.selectedMapObject.get('type'),
             mapName : this.state.selectedMapObject.get('name'),
-            ratingMe : Math.round( this.state.myPerf/14 * 100 ),
-            ratingTeam : Math.round( this.state.teamPerf/14 * 100), // normalize ratings
+            ratingMe : ratingMe,
+            ratingTeam : ratingTeam, // normalize ratings
             sr : sr,
             thrower : this.state.thrower,
             leaver : this.state.leaver

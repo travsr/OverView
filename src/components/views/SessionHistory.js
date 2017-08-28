@@ -34,8 +34,8 @@ export class SessionHistory extends Component {
                 <ListView
                     dataSource={dataSource}
                     enableEmptySections={true}
-                    renderRow={(session)=>
-                        <ResultHeader session={session} />
+                    renderRow={(session, sectionId, rowId)=>
+                        <ResultHeader session={session} index={rowId} onSelect={this.props.onItemSelect} />
                     }
                 />
 

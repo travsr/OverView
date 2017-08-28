@@ -152,13 +152,40 @@ export class ResultViewer extends Component {
             outputRange : [0, 40]
         });
 
-
+        // Character image thumbnail mapping
         let result = this.props.entry.get('result');
         let mapImgUri = {uri : this.props.entry.get('map').get('image').url()};
         let characters = this.props.entry.get('characters');
         let characterImgs = characters.map((character, index)=>{
             return {uri : characters[index].get('image').url() };
         });
+
+        // Normalized ratings
+        let ratingMeNormal = 0;
+        let ratingMeSet = false;
+        if(typeof this.props.entry.get('ratingMe') === "number") {
+            ratingMeNormal = Math.floor((this.props.entry.get('ratingMe') / 100) * 255);
+            ratingMeSet = true;
+        }
+
+        let ratingTeamNormal = 0;
+        let ratingTeamSet = false;
+        if(typeof this.props.entry.get('ratingTeam') === "number") {
+            ratingTeamNormal = Math.floor((this.props.entry.get('ratingTeam') / 100) * 255);
+            ratingTeamSet = true;
+        }
+
+
+        // If it's a zero rating from before the last update
+        if(this.props.entry.get('ratingMe') === 0 && this.props.entry.get('createdAt').getTime() < 1503806400000) {
+            ratingMeSet = false;
+        }
+
+        if(this.props.entry.get('ratingTeam') === 0 && this.props.entry.get('createdAt').getTime() < 1503806400000) {
+            ratingTeamSet = false;
+        }
+
+
 
         return (
             <TouchableHighlight onPress={this.expandView} activeOpacity={1}>
@@ -262,6 +289,53 @@ export class ResultViewer extends Component {
                             }
 
                         </View>
+
+                        {/* My Rating, Team Rating */}
+
+
+                        {/* My Rating */}
+                        {
+                            ratingMeSet &&
+                            <View style={{
+                                position:'absolute',
+                                left: 12,
+                                bottom: 66,
+                                width: 24,
+                                height: 24,
+                                borderRadius: 3,
+                                borderWidth:1,
+                                backgroundColor : 'rgba(0,0,0,.2)',
+                                borderColor: 'rgba('+(255-ratingMeNormal)+','+ratingMeNormal+',0, .8)',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{color:'#fff', fontSize : 11}}>{this.props.entry.get('ratingMe')}</Text>
+                            </View>
+                        }
+
+
+                        {/* Team Rating */}
+                        {
+                            ratingTeamSet &&
+                            <View style={{
+                                position:'absolute',
+                                left: 40,
+                                bottom: 66,
+                                width: 24,
+                                height: 24,
+                                borderRadius: 3,
+                                borderWidth:1,
+                                backgroundColor : 'rgba(0,0,0,.2)',
+                                borderColor: 'rgba('+(255-ratingTeamNormal)+','+ratingTeamNormal+',0, .8)',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <Text style={{color:'#fff', fontSize : 11}}>{this.props.entry.get('ratingTeam')}</Text>
+                            </View>
+                        }
+
+
+
 
 
                         {/* Map thumbnails, character thumbnails */}

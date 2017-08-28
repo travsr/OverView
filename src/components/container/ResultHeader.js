@@ -83,13 +83,19 @@ export class ResultHeader extends Component {
             summary = this.props.session.get('summary');
         }
 
+        let sTime = this.dataManager.serverDataModel.entryStartDate;
+
+        if(this.props.session && this.props.session.get && this.props.session.get('createdAt')) {
+            sTime = this.props.session.get('createdAt');
+        }
+
         return (
             <View style={styles.container}>
 
                 <View style={styles.infoView} >
                     <Text style={styles.recordText}>{recordText}</Text>
                     <TimeAgo style={{color:'#fff',marginTop:0, width: '100%', textAlign: 'center'}}
-                             time={this.dataManager.serverDataModel.entryStartDate} />
+                             time={sTime} />
                     <SessionVis summary={summary}
                                 style={{width:'80%', height: 20, marginTop: 10 }}/>
                     <View style={{width: '80%', marginTop : 10, flexDirection: 'row',flexWrap:'wrap'}}>
@@ -127,7 +133,28 @@ export class ResultHeader extends Component {
                         }
 
                     </View>
+
+
                 </View>
+
+                {/*View Button*/}
+                {
+                    this.props.onSelect &&
+                    <TouchableOpacity style={{
+                        position: 'absolute',
+                        top: 14, right: 14,
+                        width: 100, height: 40,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: 'rgba(97, 91, 181, .3)',
+                        borderRadius: 5
+                    }} onPress={()=> {
+                        console.log(this.props.index);
+                        this.props.onSelect(this.props.index);
+                    }}>
+                        <Text style={{color: '#fff', fontSize: 15}}>view ›</Text>
+                    </TouchableOpacity>
+                }
 
 
 

@@ -191,7 +191,7 @@ export class History extends Component {
                 ref={(ref) => this._drawer = ref}
                 type={"displace"}
                 side={"top"}
-                panOpenMask={.01}
+                panOpenMask={.00}
                 panThreshold={.10}
                 captureGestures={false}
                 openDrawerOffset={(viewport) => viewport.height - 200}
@@ -316,6 +316,11 @@ export class History extends Component {
                     animationType="slide">
                     <SessionHistory
                         onClosePress={()=>{this.closeModal();}}
+                        onItemSelect={(index)=>{
+                            this.setState({pickerText : "Old Session"});
+                            this.dataManager.selectSession(index);
+                            this.closeModal();
+                        }}
                         sessions={this.dataManager.serverDataModel.logSessions} />
                 </Modal>
 
