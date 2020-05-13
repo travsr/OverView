@@ -101,13 +101,13 @@ export class Entry extends Component {
         AsyncStorage.getItem('updateMessageCode').done((value) => {
 
 
-            let updateCode = "1";
+            let updateCode = "2";
 
             if(value != updateCode) {
 
                 Alert.alert(
                     'Thank you for using OverView! v1.0.4',
-                    '-New top bar\n-Sort Log entries by Season, Current Session, or week or month period\n-View old sessions by selecting the record text in the top right\n-SR, leaver, and thrower info now shown on log entries\n-"Load Older Entries" button\n-Groundwork finished for more filtering options in later releases',
+                    '-New top bar\n-Sort Log entries by Season, Current Session, or week or month period\n-View old sessions by selecting the record text in the top right\n-SR, leaver, thrower, and self-rating now shown on log entries\n-"Load Older Entries" button\n-Minor style tweaks, groundwork finished for more filtering options in later releases',
                     [
                         {text: 'OK', onPress: () => console.log('OK Pressed')},
                     ],

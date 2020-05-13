@@ -78,14 +78,17 @@ export class History extends Component {
     _onRefresh() {
         this.setState({refreshing: true});
 
-        this.dataManager.getLogSessions()
-            .then( this.dataManager.selectSession(this.state.selectedSessionIndex) )
+        this.dataManager.getSessionInRange(this.dataManager.serverDataModel.entryStartDate, this.dataManager.serverDataModel.entryEndDate)
             .then(()=> {
                 this.setState({refreshing: false});
             })
             .done(()=> {
                 this.setState({refreshing: false});
             });
+
+        // In order to update the log session record entries,
+        // Get log sessions again in background
+        this.dataManager.getLogSessions();
     }
 
     loadOlderEntries() {
@@ -115,30 +118,35 @@ export class History extends Component {
     onDateRangePickerChange(value) {
 
 
-        this.setState({pickerText : value});
+        this.setState({pickerText : value, refreshing : true});
 
         if(value == "This Session") {
-            this.dataManager.selectSession(0);
+            this.dataManager.selectSession(0)
+                .done(()=>{this.setState({refreshing:false});});
         }
         else if(value == "Past 7 Days") {
             let eDate = new Date();
             let sDate = new Date(eDate.getTime() - 604800000 );
-            this.dataManager.getSessionInRange(sDate, eDate );
+            this.dataManager.getSessionInRange(sDate, eDate )
+                .done(()=>{this.setState({refreshing:false});});
         }
         else if(value == "Past 30 Days") {
             let eDate = new Date();
             let sDate = new Date(eDate.getTime() - 2592000000 );
-            this.dataManager.getSessionInRange(sDate, eDate );
+            this.dataManager.getSessionInRange(sDate, eDate )
+                .done(()=>{this.setState({refreshing:false});});
         }
         else if(value == "Season 5") {
             let eDate = new Date("8/28/17");
             let sDate = new Date("5/31/17");
-            this.dataManager.getSessionInRange(sDate, eDate);
+            this.dataManager.getSessionInRange(sDate, eDate)
+                .done(()=>{this.setState({refreshing:false});});
         }
         else if(value == "Season 6") {
             let eDate = new Date("10/01/17");
             let sDate = new Date("9/01/17");
-            this.dataManager.getSessionInRange(sDate, eDate);
+            this.dataManager.getSessionInRange(sDate, eDate)
+                .done(()=>{this.setState({refreshing:false});});
         }
 
     }
@@ -317,12 +325,33 @@ export class History extends Component {
                     <SessionHistory
                         onClosePress={()=>{this.closeModal();}}
                         onItemSelect={(index)=>{
-                            this.setState({pickerText : "Old Session"});
-                            this.dataManager.selectSession(index);
+                            this.setState({pickerText : "Old Session",refreshing : true});
+                            this.dataManager.selectSession(index)
+                                .done(()=>{
+                                    this.setState({refreshing : false});
+                                });
                             this.closeModal();
                         }}
                         sessions={this.dataManager.serverDataModel.logSessions} />
                 </Modal>
+
+                {
+                    this.state.refreshing &&
+                    <View style={{
+                        position:'absolute',
+                        left : '50%',
+                        marginLeft : -20,
+                        top : 70,
+                        backgroundColor: '#fff',
+                        width: 40,
+                        height: 40,
+                        borderRadius: 4,
+                        alignItems : 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <ActivityIndicator />
+                    </View>
+                }
 
             </View>
             </Drawer>
